@@ -1,0 +1,190 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Move beyond one-off prompts · Tim Tran</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="reading.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"></head><body><header><div class="wrap navrow"><a class="brand" href="../index.html">tim tran<span>.</span><small>PRACTICAL AI FOR YOUR REAL WORK</small></a><a class="text-link" href="../index.html#resources">All resources <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></header><main class="reading"><h1 id="move-beyond-one-off-prompts">Move beyond one-off prompts</h1><p class="reading-intro">Explore five ways of working with AI, from asking questions to running repeatable workflows.</p><a class="button navy" href="ai-workflow-ladder.md" download>Download this guide <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a><article><!-- Adapted for public reading from Tim’s resource library. -->
+
+
+<h2 id="1-personal-ai-proficiency-the-individual">1. Personal AI
+Proficiency (The Individual)</h2>
+<p><strong>Framework:</strong> <strong>TOE</strong> (Task Complexity,
+Output Quality, Effort) — <em>academic alias: TQE
+(Task–Quality–Effort)</em> <strong>Goal:</strong> Move from "User" to
+"Agent Designer."</p>
+<p><strong>TOE definitions</strong></p>
+<ul>
+<li><strong>Task Complexity (T):</strong> How complex, ambiguous, or
+cross-domain a task the person can successfully handle with AI.</li>
+<li><strong>Output Quality (O):</strong> The quality of the final usable
+deliverable against the standard that actually matters for the
+task.</li>
+<li><strong>Effort (E):</strong> How much human work is required to get
+the output to that standard, consistently.</li>
+</ul>
+<blockquote>
+<p><strong>Important:</strong> O measures final output quality, not
+first-draft quality. E measures the human effort needed to reach that
+quality.</p>
+</blockquote>
+<h3
+id="level-1-ask-the-tourist--tries-ai-once-takes-whatever-comes-back">Level
+1: Ask (The Tourist — tries AI once, takes whatever comes back)</h3>
+<ul>
+<li><strong>Behavior:</strong> Types 1-2 sentences -&gt; copies the
+first output.</li>
+<li><strong>Tools:</strong> Free web-chat interfaces.</li>
+<li><strong>Breaks when:</strong> Tasks need context or nuance.</li>
+<li><strong>Mindset:</strong> "AI is a search engine that writes."</li>
+</ul>
+<h3
+id="level-2-instruct-the-power-user--knows-the-tricks-still-does-everything-manually">Level
+2: Instruct (The Power User — knows the tricks, still does everything
+manually)</h3>
+<ul>
+<li><strong>Behavior:</strong> Uses structured prompts (RTCF). Saves
+prompts into Custom GPTs/Gems.</li>
+<li><strong>Tools:</strong> Paid Pro subscriptions, Custom GPTs.</li>
+<li><strong>Breaks when:</strong> New task types appear; prompts don't
+transfer.</li>
+<li><strong>Mindset:</strong> "I need a prompt for every specific
+task."</li>
+</ul>
+<blockquote>
+<p><strong>The Structure Gap:</strong> If AI feels inconsistent to you,
+you're at L1-L2. The inconsistency isn't AI's limitation — it's the
+absence of structure around AI. L1-L2 is one person, one prompt, one
+shot. No feedback loop, no verification, no iteration. That's not how
+any professional works — it's not how AI should work either. The jump to
+L3 is adding structure: standards, reusable systems, and the ability to
+<em>verify</em> output — not just generate it.</p>
+</blockquote>
+<h3
+id="level-3-systematize-the-architect--builds-reusable-systems-not-one-off-prompts">Level
+3: Systematize (The Architect — builds reusable systems, not one-off
+prompts)</h3>
+<ul>
+<li><strong>Behavior:</strong> Uses <strong>Master Prompts</strong>
+(Role + Variable Task). Manages "Context Rot" by pinning standards. Uses
+Markdown (.md) for instruction logic.</li>
+<li><strong>Tools:</strong> Advanced model settings (Temperature,
+Top-p), Project-based context files.</li>
+<li><strong>Breaks when:</strong> Needs to build functional tools, not
+just text.</li>
+<li><strong>Mindset:</strong> "I build engines, not just prompts."</li>
+</ul>
+<h3
+id="level-4-build-the-designer--makes-ai-do-things-not-just-say-things">Level
+4: Build (The Designer — makes AI do things, not just say things)</h3>
+<ul>
+<li><strong>Behavior:</strong> Designs <strong>Value
+Hierarchies</strong> (rules for when goals conflict). Prototypes
+functional tools.</li>
+<li><strong>Tools:</strong> Low-code agents, simple API
+connections.</li>
+<li><strong>Breaks when:</strong> Volume and recurring processes scale
+beyond one person.</li>
+<li><strong>Mindset:</strong> "AI can build the solution, not just
+describe it."</li>
+</ul>
+<h3
+id="level-5-productize-the-orchestrator--manages-a-system-that-manages-the-work">Level
+5: Productize (The Orchestrator — manages a system that manages the
+work)</h3>
+<ul>
+<li><strong>Behavior:</strong> Operates a personal ecosystem of
+autonomous agents. Designs PDCA harnesses (Plan-Do-Check-Act) that
+coordinate multiple agents — and reuses the same coordination patterns
+across different domains.</li>
+<li><strong>Tools:</strong> Personal automation stacks, custom dev
+environments.</li>
+<li><strong>Mindset:</strong> "I manage a system that manages my
+work."</li>
+</ul>
+<h3 id="toe-scoring-matrix">TOE Scoring Matrix</h3>
+<p><strong>T — "How complex is the task this person can reliably handle
+with AI?"</strong> <strong>O — "How good is the final deliverable
+against the task's real standard?"</strong> <strong>E — "How much human
+effort per task to reach that standard?"</strong></p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Task Complexity (T)</th>
+<th>Output Quality (O)</th>
+<th>Effort (E)</th>
+<th>What Loses Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Ask</td>
+<td>Single-step, clearly defined</td>
+<td>Usable only for low-stakes tasks</td>
+<td>Minimal — but only because the task is trivial</td>
+<td>Nothing yet — everything is manual</td>
+</tr>
+<tr>
+<td>2 Instruct</td>
+<td>Multi-step, repeatable with a template</td>
+<td>Meets standard after significant human editing</td>
+<td>High per task — crafting and editing every time</td>
+<td>Basic drafting, simple research, translation</td>
+</tr>
+<tr>
+<td>3 Systematize</td>
+<td>Complex, ambiguous, requiring judgment calls</td>
+<td>Meets standard after minor human editing</td>
+<td>High upfront, near-zero per repeat</td>
+<td>Per-task prompt crafting, manual QA by gut feel</td>
+</tr>
+<tr>
+<td>4 Build</td>
+<td>Novel problem across multiple domains</td>
+<td>Meets standard with minimal rework, across output types (text,
+tools, code)</td>
+<td>Design effort to build, then low per task</td>
+<td>Any execution that doesn't feed evaluation</td>
+</tr>
+<tr>
+<td>5 Productize</td>
+<td>Portfolio of interdependent workflows</td>
+<td>Meets standard consistently without human rework</td>
+<td>Maintenance only — system handles execution</td>
+<td>Individual execution across the board</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Scoring rule (Version B — updated 2026-07-02, supersedes the
+earlier "lowest of T/O/E" rule):</strong></p>
+<blockquote>
+<p><strong>Task sets which rung you're eligible for. Output Quality is
+the gate at that rung. Effort is a coaching note, not a grade. L4/L5
+also require an individual live defense.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Non-compensatory</strong> — you cannot buy back a weak gate
+with strength elsewhere. Task-eligibility and Output Quality are the two
+<em>binding</em> dimensions.</li>
+<li><strong>Why Effort no longer gates the level:</strong> leverage is
+already encoded in <em>which rung you reach</em> — an L5 "Productize"
+person is high-leverage by definition. Making Effort a separate gate
+would <strong>double-count</strong> leverage. Effort is recorded as a
+coaching signal (and it can't be reliably observed in a single
+assessment — the build happened over weeks).</li>
+<li><strong>Anti-gaming:</strong> the Task handed to the person is
+pre-classified at a known complexity, so nobody can claim L4 by acing an
+L2 task; and TOE scores the AI work itself (prompts, iterations, output)
+— no AI interaction, no sample, no score.</li>
+</ul>
+<p><em>Interpretation rule: two people can have the same O with very
+different E. Final quality and effort are related, but they are not the
+same measurement — which is exactly why E informs coaching, not the
+level.</em></p>
+<p><strong>The evaluation paradox:</strong> From L3 onward, the core
+skill shifts from <em>doing the work</em> to <em>evaluating whether the
+work is correct.</em> But the best evaluators are people who CAN do the
+work — their execution skill feeds their judgment. A training manager
+who has designed 50 workshops from scratch catches flaws in AI-designed
+workshops that a reviewer-only never would. Execution skills don't
+disappear — they change purpose from "I produce this" to "I can smell
+when this is wrong."</p>
+<hr />
+<p>This is a practical framework for reflection, not a certification or
+a validated assessment.</p>
+</article><aside><strong>Put this to work on your next task.</strong><p>Take the free workflow scorecard for a suggested next step.</p><a class="button navy" href="../index.html#scorecard">Find your next step <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></aside></main></body></html>

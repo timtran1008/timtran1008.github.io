@@ -1,0 +1,186 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ask for the output you actually need · Tim Tran</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="reading.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"></head><body><header><div class="wrap navrow"><a class="brand" href="../index.html">tim tran<span>.</span><small>PRACTICAL AI FOR YOUR REAL WORK</small></a><a class="text-link" href="../index.html#resources">All resources <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></header><main class="reading"><h1 id="output-format-fit">Output Format Fit</h1><p class="reading-intro">Choose a document, spreadsheet, presentation, or interactive tool to fit the job.</p><a class="button navy" href="output-format.md" download>Download this guide <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a><article><!-- Adapted for public reading from Tim’s resource library. -->
+
+
+<p><strong>Client-facing name:</strong> Don't Ask AI For Text When You
+Need A Tool<br />
+<strong>Parent model:</strong> Input -&gt; Process -&gt; Output<br />
+<strong>Use when:</strong> A learner asks AI for an answer, but the real
+need is a usable artifact in the right format.</p>
+<hr />
+<h2 id="core-thesis">Core Thesis</h2>
+<p>AI users often default to text because chat interfaces return
+text.</p>
+<p>That is a weak default.</p>
+<p>The right question is:</p>
+<blockquote>
+<p>What does this output need to let the user do?</p>
+</blockquote>
+<p>The same input and process may need different output formats
+depending on the job: thinking, sending, presenting, calculating,
+tracking, comparing, navigating, or interacting.</p>
+<p>This framework belongs to Tim's <strong>Input -&gt; Process -&gt;
+Output</strong> teaching model, specifically the <strong>Output</strong>
+layer.</p>
+<hr />
+<h2 id="output-format-selector">Output Format Selector</h2>
+<table>
+<thead>
+<tr>
+<th>Output need</th>
+<th>Best format</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Think, draft, store context, reuse with AI</td>
+<td>Markdown</td>
+<td>Lightweight, versionable, AI-readable, easy to edit</td>
+</tr>
+<tr>
+<td>Send formal document, collect comments, preserve professional
+formatting</td>
+<td>DOCX</td>
+<td>Best for official circulation and tracked review</td>
+</tr>
+<tr>
+<td>Present live to an audience</td>
+<td>Slides / PPTX / HTML slides</td>
+<td>Controls sequence, pacing, and visual emphasis</td>
+</tr>
+<tr>
+<td>Calculate, sort, filter, track numbers</td>
+<td>XLSX / spreadsheet</td>
+<td>Best for tables, formulas, and structured data</td>
+</tr>
+<tr>
+<td>Explore, compare, click, filter, navigate, display status</td>
+<td>HTML</td>
+<td>Best for interactive, visual, spatial, or dashboard-like
+artifacts</td>
+</tr>
+<tr>
+<td>Quick message or summary</td>
+<td>Email / plain text</td>
+<td>Best when the job is communication, not artifact reuse</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="where-html-fits">Where HTML Fits</h2>
+<p>HTML is not only for websites.</p>
+<p>HTML is useful when the output needs:</p>
+<ul>
+<li>layout</li>
+<li>visual hierarchy</li>
+<li>interaction</li>
+<li>navigation</li>
+<li>filtering</li>
+<li>comparison</li>
+<li>status display</li>
+<li>clickable structure</li>
+<li>lightweight dashboard behavior</li>
+<li>presentation without PowerPoint</li>
+</ul>
+<p>Markdown flattens spatial information. HTML can make spatial or
+interactive information usable.</p>
+<p>Examples:</p>
+<ul>
+<li>implementation timeline</li>
+<li>triage board</li>
+<li>interactive concept explainer</li>
+<li>status report dashboard</li>
+<li>incident postmortem</li>
+<li>workflow map</li>
+<li>decision tree</li>
+</ul>
+<hr />
+<h2 id="format-decision-questions">Format Decision Questions</h2>
+<p>Before asking AI to produce the final output, ask:</p>
+<ol type="1">
+<li><strong>Who will use this output?</strong></li>
+<li><strong>What will they do with it?</strong></li>
+<li><strong>Does the output need to be read, edited, presented,
+calculated, navigated, or acted on?</strong></li>
+<li><strong>Will the output be reused by AI later?</strong></li>
+<li><strong>Does the output need interaction or visual
+comparison?</strong></li>
+<li><strong>Does the organization expect a specific
+format?</strong></li>
+</ol>
+<p>The format should follow the use case, not the chat default.</p>
+<hr />
+<h2 id="worked-example-training-attendance-report">Worked Example:
+Training Attendance Report</h2>
+<h3 id="same-input">Same Input</h3>
+<p>Training attendance data, LMS export, calendar, feedback comments,
+and department list.</p>
+<h3 id="same-process">Same Process</h3>
+<p>AI summarizes, checks missing sessions, calculates attendance,
+extracts themes, and drafts recommendations.</p>
+<h3 id="different-outputs">Different Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>User need</th>
+<th>Better output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tim needs to think through the issue</td>
+<td>Markdown notes</td>
+</tr>
+<tr>
+<td>HR head needs official summary</td>
+<td>Email or DOCX</td>
+</tr>
+<tr>
+<td>L&amp;D needs to track monthly numbers</td>
+<td>XLSX</td>
+</tr>
+<tr>
+<td>BOD needs a live update</td>
+<td>Slide summary</td>
+</tr>
+<tr>
+<td>Department heads need to explore their own team's data</td>
+<td>HTML dashboard with department filters</td>
+</tr>
+</tbody>
+</table>
+<h3 id="teaching-point">Teaching Point</h3>
+<p>The mistake is asking:</p>
+<blockquote>
+<p>"Can AI make me a report?"</p>
+</blockquote>
+<p>The better question is:</p>
+<blockquote>
+<p>"What job must this report do after AI produces it?"</p>
+</blockquote>
+<hr />
+<h2 id="toe--gie-link">TOE / GIE Link</h2>
+<h3 id="toe">TOE</h3>
+<p>At Level 1-2, users usually accept the default output format.</p>
+<p>At Level 3, users specify reusable output standards.</p>
+<p>At Level 4, users can build simple tools and interactive outputs.</p>
+<p>At Level 5, output formats become part of a managed workflow
+system.</p>
+<h3 id="gie">GIE</h3>
+<p>At organizational level, output format also affects governance:</p>
+<ul>
+<li>DOCX/email outputs create circulation and approval trails.</li>
+<li>XLSX outputs create numeric audit needs.</li>
+<li>HTML dashboards may require hosting, access control, and
+versioning.</li>
+<li>Official records need stronger controls than draft artifacts.</li>
+</ul>
+<hr />
+<h2 id="decision-rule">Decision Rule</h2>
+<p>If the user only needs to read, text may be enough.</p>
+<p>If the user needs to work with the output, choose the format that
+supports the work.</p>
+<p>Do not ask AI for text when the actual need is a tool, table,
+dashboard, slide, or official document.</p>
+<hr />
+</article><aside><strong>Put this to work on your next task.</strong><p>Take the free workflow scorecard for a suggested next step.</p><a class="button navy" href="../index.html#scorecard">Find your next step <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></aside></main></body></html>

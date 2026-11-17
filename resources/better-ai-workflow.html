@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A better way to do complex work with AI · Tim Tran</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="reading.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"></head><body><header><div class="wrap navrow"><a class="brand" href="../index.html">tim tran<span>.</span><small>PRACTICAL AI FOR YOUR REAL WORK</small></a><a class="text-link" href="../index.html#resources">All resources <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></header><main class="reading"><h1 id="a-better-way-to-do-complex-work-with-ai">A better way to do
+complex work with AI</h1><p class="reading-intro">The complete six-step method, with the interview and review prompts ready to copy.</p><a class="button navy" href="better-ai-workflow.md" download>Download this guide <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a><article>
+<p>Use this when the task needs documents, background, and several
+decisions: a proposal, a report, or a plan. If you are starting with a
+short email or rewrite, use the <a
+href="first-useful-task.html">one-task starter</a> first.</p>
+<h2 id="1-give-ai-the-context">1. Give AI the context</h2>
+<p>Attach the files the task needs and one example of a useful output.
+Tell AI who will use the result and what they need to do with it. Use
+material you are allowed to share with the tool.</p>
+<h2 id="2-agree-the-plan-before-drafting">2. Agree the plan before
+drafting</h2>
+<p>Paste the interview prompt below. Answer the questions and correct
+any assumptions. You decide the approach; AI helps surface the
+decisions.</p>
+<h3 id="copy-interview-prompt">Copy: interview prompt</h3>
+<p>The original prompt is in English and asks AI to reply in Vietnamese,
+matching the audience it was written for. Change the final language line
+if your work is in another language.</p>
+<pre class="text"><code>Interview me relentlessly until we reach a shared understanding. Map this as a design tree: every decision branches into the decisions that hang off it.
+ 
+Work the tree in rounds. The frontier is every decision whose prerequisites are already settled - the questions you can ask now without guessing at answers you haven&#39;t heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for my answers before the next round.
+ 
+Each question is formatted like so:
+ 
+? Q1 - &lt;question title&gt;: &lt;question body, may be multiple paragraphs, including multiple choices&gt;
+ 
+-&gt; &lt;your recommended answer&gt;
+ 
+Each round of answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a later round, not this one.
+ 
+The decisions are mine: put each to me and wait.
+ 
+The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed.
+ 
+Always respond in the language of my work documents (Vietnamese), even though these instructions are in English.</code></pre>
+<h2 id="3-make-the-first-version">3. Make the first version</h2>
+<p>Ask AI to carry out the plan you agreed. Keep the brief, source
+files, and working draft together so corrections have a clear
+reference.</p>
+<h2 id="4-check-the-facts-and-the-recipients-experience">4. Check the
+facts and the recipient’s experience</h2>
+<p>First, check claims and numbers against the source files. Ask AI to
+name which source supports each important claim. Open those sources
+yourself before relying on the result.</p>
+<p>Then open a fresh chat, give it only the draft, and paste the review
+prompt below. This checks whether the person receiving the work could
+understand and act on it without your explanation.</p>
+<h3 id="copy-review-prompt">Copy: review prompt</h3>
+<pre class="text"><code>You are reviewing this as the intended recipient of the deliverable below - the person it is actually made for, who has to receive it and act on it. You do not have the source files, and that is deliberate: if this only makes sense to someone holding the source material, that is a finding.
+Challenge it. Check whether you could act on it, whether the logic holds, whether anything material is missing, and whether it contradicts itself.
+Give every finding a severity - CRITICAL (must change before this ships), MAJOR (weakens it substantially), MINOR (worth fixing) - and for each one name the problem, say why it matters to you as the recipient, and suggest a fix.
+Lead with the issue. Do not open with what is good, do not hedge, and do not repeat my context back to me. If something is genuinely strong, say so in one line and move on.
+When I push back on a finding, do not concede unless I give you new evidence or show your reasoning is wrong. If I argue without evidence, or simply repeat myself, hold the finding and say so.
+Output: findings grouped by severity, then one sentence - ready, almost ready, or needs rework.
+ 
+Always respond in the language of my work documents (Vietnamese), even though these instructions are in English.</code></pre>
+<h2 id="5-fix-what-matters">5. Fix what matters</h2>
+<p>Read the findings and decide which are valid. Revise the draft, check
+changed facts, and repeat until the result meets your standard. You
+approve the final work.</p>
+<h2 id="6-save-the-method-for-next-time">6. Save the method for next
+time</h2>
+<p>If the task repeats, keep the brief, good example, instructions, and
+review checklist together. Your tool may let you save them in a Project,
+Gem, custom GPT, or another reusable workspace. A skill is a saved set
+of steps an AI agent can follow. Start with the reuse option your tool
+supports.</p>
+<p>Next time, bring the new input and check the new result. Update the
+instructions when you discover a useful correction.</p>
+<h2 id="a-complete-first-attempt">A complete first attempt</h2>
+<p>For a weekly update: attach your notes and last week’s good update,
+agree what this week’s reader needs, draft, check every claim, review it
+as the reader, then save the instructions beside the example. This is an
+illustrative task, not a reported client result.</p>
+<p>Based on Tim Tran’s six-step work method. The interview prompt adapts
+the design-tree approach credited to Matt Pocock in Tim’s public skills
+collection.</p>
+</article><aside><strong>Put this to work on your next task.</strong><p>Bring the task and where it gets stuck if you would like help.</p><a class="button navy" href="../index.html#contact">Tell Tim the task <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></aside></main></body></html>

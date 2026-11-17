@@ -1,0 +1,385 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Make your documents useful again · Tim Tran</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="reading.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"></head><body><header><div class="wrap navrow"><a class="brand" href="../index.html">tim tran<span>.</span><small>PRACTICAL AI FOR YOUR REAL WORK</small></a><a class="text-link" href="../index.html#resources">All resources <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></header><main class="reading"><h1 id="dùng-notebooklm-làm-kho-kiến-thức-cho-một-công-việc">Dùng
+NotebookLM làm kho kiến thức cho một công việc</h1><p class="reading-intro">An eight-step guide to using NotebookLM as a source-based project knowledge base.</p><a class="button navy" href="notebooklm-guide.md" download>Download this guide <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a><article><!-- Adapted for public reading from Tim’s resource library. -->
+
+
+<p><em>Nguồn: Nate's Zero to AI — "How to use NotebookLM as a knowledge
+base" (nateszerotoai.substack.com/p/notebooklm-guide)</em></p>
+<hr />
+<h2 id="vấn-đề">Vấn đề</h2>
+<p>Bạn có một đống tài liệu: vài file PDF, một bản ghi cuộc họp, mấy báo
+cáo lưu lại vì thấy quan trọng rồi quên mất. Việc cần làm là hiểu đống
+tài liệu đó đủ rõ để làm ra một thứ gì đó — một bản tóm tắt cho sếp, một
+bài giảng, một quyết định.</p>
+<p>Chat với AI có thể tóm tắt một file. Nhưng câu trả lời rời rạc không
+cho đống tài liệu một chỗ ở ổn định. Câu trả lời đầu thành bối cảnh cho
+câu sau, câu sau lại là bản mờ hơn của câu đầu. Cuối cùng bạn vừa làm
+bài, vừa phải giữ cả đống nguồn trong đầu.</p>
+<p>Bạn cần một nơi để <strong>file PDF, câu hỏi, câu trả lời có trích
+dẫn, và ghi chú</strong> nằm chung với nhau trong lúc làm việc.</p>
+<hr />
+<h2 id="kho-kiến-thức-cỡ-một-dự-án-nghĩa-là-gì">"Kho kiến thức cỡ một dự
+án" nghĩa là gì</h2>
+<p>Không phải một hệ thống khổng lồ. Chỉ là <strong>một notebook chứa
+tài liệu của một công việc cụ thể</strong>, cộng với các câu hỏi bạn
+hỏi, các câu trả lời có trích dẫn, và các ghi chú bạn lưu lại. Rời đi
+rồi quay lại mà không phải dựng lại từ đầu.</p>
+<p>So sánh nhanh:</p>
+<table>
+<thead>
+<tr>
+<th>Cách làm</th>
+<th>Hạn chế</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Thư mục file</strong></td>
+<td>Chỉ lưu file. Không cho biết báo cáo nào trả lời câu hỏi nào, đoạn
+hữu ích nằm ở đâu.</td>
+</tr>
+<tr>
+<td><strong>Cửa sổ chat</strong></td>
+<td>Cuộc trò chuyện mới là vật chính. Mở chat mới, đổi công cụ, hay quay
+lại tuần sau là mất mạch.</td>
+</tr>
+<tr>
+<td><strong>Tài liệu hoàn chỉnh</strong></td>
+<td>Đó là thứ bạn làm ra <em>sau khi</em> đã hiểu. Không xử lý được giai
+đoạn giữa lộn xộn.</td>
+</tr>
+<tr>
+<td><strong>Notebook</strong></td>
+<td>Giữ file nguồn + câu hỏi + câu trả lời có trích dẫn + ghi chú chung
+một chỗ trong lúc bản nháp còn đang thành hình.</td>
+</tr>
+</tbody>
+</table>
+<p>Ví dụ thực tế: sinh viên gom bài giảng và ghi chú để làm đề cương ôn
+thi. Người mới vào công ty gom tài liệu onboarding và biên bản họp cũ để
+biết quy trình chính thức và những câu còn phải hỏi người thật. Người
+làm nghiên cứu tách bằng chứng trực tiếp khỏi tài liệu nền nghe có vẻ
+liên quan nhưng không gánh nổi kết luận chính.</p>
+<hr />
+<h2 id="nguyên-tắc-cốt-lõi-tra-cứu-trước-phán-xét-sau">Nguyên tắc cốt
+lõi: <strong>tra cứu trước, phán xét sau</strong></h2>
+<p>Sai lầm phổ biến nhất là <strong>hỏi kết luận quá sớm</strong>.</p>
+<p>Bạn tải một đống tài liệu lên và hỏi ngay "vậy kết luận là gì?".
+NotebookLM sẽ trả lời trơn tru, có trích dẫn, và có thể đúng phần lớn.
+Nhưng:</p>
+<blockquote>
+<p><strong>Một câu trả lời có trích dẫn không phải là một câu trả lời đã
+được kiểm chứng.</strong></p>
+</blockquote>
+<p>Trích dẫn chỉ cho bạn biết <em>chỗ để nhìn</em>. Nó không chứng minh
+câu bạn sắp lặp lại được nguồn hậu thuẫn mạnh như giọng văn của AI khiến
+bạn tưởng. Nguồn có thể chỉ hậu thuẫn một khẳng định hẹp hơn, đo một thứ
+khác, hoặc chỉ hữu ích như bối cảnh.</p>
+<p>Nên chia làm hai việc:</p>
+<ol type="1">
+<li><strong>Tra cứu (máy làm tốt):</strong> Trong các nguồn này có gì?
+Mỗi nguồn nói gì, đo cái gì, đoạn nào tôi cần mở ra xem?</li>
+<li><strong>Phán xét (bạn làm):</strong> Nói được gì chắc chắn? Chỗ nào
+phải nói nhẹ đi? Chỗ nào cần thêm nguồn? Chỗ nào nên bỏ hẳn khỏi bản
+cuối?</li>
+</ol>
+<hr />
+<h2 id="quy-trình-8-bước">Quy trình 8 bước</h2>
+<p>Ví dụ mẫu của tác giả: <strong>"AI đã gây mất việc làm
+chưa?"</strong> — câu hỏi nghe đơn giản nhưng các nguồn thì không. Một
+bài về việc làm, một bài về tin tuyển dụng, một bài về mức độ nghề
+nghiệp bị AI ảnh hưởng — cả ba cùng nằm trong một cuộc thảo luận, nhưng
+<strong>không cùng một loại bằng chứng</strong>.</p>
+<ol type="1">
+<li>Tạo một notebook cho một công việc</li>
+<li>Nạp bộ nguồn vào</li>
+<li>Hỏi bản kiểm kê nguồn</li>
+<li>Xếp loại nguồn theo thứ chúng gánh được</li>
+<li>Biến nguồn thành ma trận bằng chứng</li>
+<li>Chỉ hỏi tổng hợp <strong>sau khi</strong> đã có ma trận</li>
+<li>Lưu lại các câu hỏi còn bỏ ngỏ</li>
+<li>Chỉ khi đó mới dùng đa phương tiện làm lớp ôn tập</li>
+</ol>
+<hr />
+<h3 id="bước-1--tạo-notebook-và-nạp-nguồn">Bước 1 — Tạo notebook và nạp
+nguồn</h3>
+<p>Tạo notebook mới, đặt tên theo <strong>công việc</strong> đang cần
+làm, không phải theo chủ đề chung chung. Tải tất cả PDF và link vào bảng
+Sources <strong>trước khi</strong> hỏi bất cứ kết luận nào.</p>
+<p>NotebookLM chỉ làm việc được trong ranh giới bạn vẽ ra. Nếu notebook
+trộn lẫn nghiên cứu việc làm, nghiên cứu tin tuyển dụng, và ước lượng
+mức độ ảnh hưởng, bạn phải <strong>làm cho sự khác nhau đó lộ
+ra</strong> trước, nếu không câu trả lời sẽ âm thầm gộp các loại bằng
+chứng khác nhau vào một đống.</p>
+<p>Tác giả còn thêm một bản tóm tắt dự án ngắn, kèm một cảnh báo rõ
+ràng: <em>đừng coi "mức độ ảnh hưởng", "tin tuyển dụng", và "việc làm
+thực tế" là ba thứ có thể thay thế cho nhau.</em></p>
+<p>Câu hỏi khung của cả notebook:</p>
+<blockquote>
+<p>Trong các nghiên cứu thị trường lao động gần đây, chỗ nào có bằng
+chứng cho thấy AI đã làm giảm việc làm, tuyển dụng, thu nhập, giờ làm,
+hoặc tin tuyển dụng — và chỗ nào các bài nghiên cứu thấy ít hoặc chưa
+thấy tác động rộng lên thị trường lao động?</p>
+</blockquote>
+<p>Đủ rộng để phải so sánh, đủ hẹp để các nguồn thuộc về nhau.</p>
+<hr />
+<h3 id="bước-2--hỏi-xem-trong-đống-nguồn-có-những-gì">Bước 2 — Hỏi xem
+trong đống nguồn có những gì</h3>
+<p><strong>Prompt đầu tiên nên cố tình nhàm chán.</strong></p>
+<pre><code>Hãy tạo bản kiểm kê nguồn cho notebook này, về câu hỏi: [CÂU HỎI CỦA BẠN].
+
+Với mỗi nguồn, cho tôi:
+- tên nguồn
+- loại nguồn
+- năm hoặc ngày
+- phạm vi địa lý
+- bộ dữ liệu hoặc nền tảng bằng chứng được dùng
+- kết quả/chỉ số được đo
+- cách đo biến số chính
+- phát hiện chính, viết trong một câu đơn giản
+- nguồn này hậu thuẫn trực tiếp cho điều gì
+- nguồn này KHÔNG chứng minh được điều gì
+- trích dẫn nên kiểm tra trước tiên
+
+Sau bản kiểm kê, cho tôi biết nguồn nào là trung tâm, nguồn nào là thứ cấp,
+và nguồn nào tôi nên cẩn thận đừng dùng quá tay.</code></pre>
+<p>Các trường giống nhau lặp lại cho mọi nguồn <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg> <strong>các bài trở nên
+so sánh được</strong>. Các trích dẫn <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg> <strong>so sánh đó kiểm tra
+được</strong>.</p>
+<p><strong>Trích dẫn không phải để trang trí.</strong> Bấm vào con số
+nhỏ, NotebookLM mở đúng đoạn nguồn bên cạnh câu trả lời. Đổi câu hỏi
+trong đầu bạn từ <em>"Bản tóm tắt này nghe có đúng không?"</em> thành
+<em>"Tôi có lần ngược được câu này về nguồn không, và nguồn có thật sự
+nói như notebook bảo nó nói không?"</em></p>
+<p>NotebookLM cũng gợi ý câu hỏi tiếp theo phía dưới. Coi đó là
+<strong>manh mối</strong>, chọn cái nào làm rõ được một khác biệt giữa
+các nguồn hoặc một cảnh báo mà bản kiểm kê vừa lộ ra.</p>
+<p>Đến đây bạn <strong>vẫn chưa trả lời câu hỏi chính</strong>. Bạn mới
+có một bản kiểm kê so sánh được và một đường đi thẳng về đoạn văn đứng
+sau mỗi khẳng định quan trọng.</p>
+<hr />
+<h3 id="bước-3--xếp-loại-nguồn-theo-mức-độ-trả-lời-trực-tiếp">Bước 3 —
+Xếp loại nguồn theo mức độ trả lời trực tiếp</h3>
+<p>Bản kiểm kê cho biết trong notebook có gì. Prompt tiếp theo hỏi
+<strong>nguồn nào nên gánh phần nào của câu trả lời</strong>.</p>
+<pre><code>Hãy đánh giá xem mỗi nguồn trong notebook trả lời trực tiếp đến đâu cho câu hỏi:
+[CÂU HỎI CỦA BẠN]
+
+Xếp các nguồn vào 4 nhóm:
+1. Bằng chứng trực tiếp về kết quả cần biết
+2. Bằng chứng gián tiếp (tín hiệu xung quanh: nhu cầu, hành vi, thu nhập...)
+3. Ước lượng mức độ ảnh hưởng / rủi ro — chưa cho thấy kết quả thực tế
+4. Nguồn bối cảnh: giúp hiểu vấn đề nhưng KHÔNG được gánh kết luận chính
+
+Với mỗi nguồn, chấm mức hữu ích cho câu hỏi này: cao / trung bình / thấp.
+Giải thích lý do bằng lời lẽ đơn giản.
+
+Sau đó liệt kê:
+- 3 nguồn mạnh nhất để trả lời câu hỏi
+- 3 nguồn dễ gây nói quá hoặc gây nhầm lẫn nhất
+- bằng chứng còn thiếu nào sẽ làm notebook này mạnh hơn</code></pre>
+<p>Ví dụ trong bài: dữ liệu bảng lương, đăng ký lao động, thất nghiệp <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+nhóm bằng chứng trực tiếp. Tin tuyển dụng chỉ cho thấy nhu cầu tuyển
+thay đổi, <strong>không</strong> chứng minh người đang làm bị mất việc.
+Ước lượng mức độ ảnh hưởng chỉ ra nghề nào <em>có thể</em> dễ tổn
+thương, <strong>không</strong> cho thấy việc làm đã mất.</p>
+<p><strong>Cảnh giác với chính ngôn từ của máy.</strong> Trong lần chạy
+đó, NotebookLM dùng những cụm như <em>"chứng minh trực tiếp"</em>,
+<em>"chứng minh rằng"</em>. Một nguồn có thể hậu thuẫn một khẳng định mà
+không hề chứng minh phiên bản rộng mà người đọc sẽ nghe thấy. Coi thứ
+hạng này là <strong>giả thuyết đầu tiên</strong>, rồi tự kiểm lại những
+khẳng định bạn định dùng.</p>
+<hr />
+<h3 id="bước-4--biến-notebook-thành-ma-trận-bằng-chứng">Bước 4 — Biến
+notebook thành ma trận bằng chứng</h3>
+<p>Mục đích: <strong>không cho các loại kết quả khác nhau nhòe vào một
+đoạn văn xuôi.</strong></p>
+<pre><code>Hãy dựng ma trận bằng chứng cho notebook này.
+
+Các cột:
+- Nguồn
+- Năm
+- Phạm vi địa lý
+- Bộ dữ liệu / nền tảng bằng chứng
+- Cách đo biến chính
+- Kết quả được đo
+- Phát hiện về [vấn đề bạn quan tâm]
+- Nhóm hoặc lĩnh vực bị ảnh hưởng
+- Đây là bằng chứng trực tiếp, gián tiếp, hay chỉ là ước lượng ảnh hưởng
+- Hạn chế chính
+- Trích dẫn nên mở ra kiểm tra
+
+Sau ma trận, tóm tắt quy luật trong 5 gạch đầu dòng:
+- chỗ nào bằng chứng cho thấy tác động có thể đã xảy ra
+- chỗ nào bằng chứng chưa cho thấy tác động rộng
+- chỗ nào các nghiên cứu đang đo những thứ khác nhau và KHÔNG được gộp lại thành một kết luận
+- những phạm trù nào dễ bị nhầm lẫn với nhau
+- khẳng định thận trọng nào là thứ bằng chứng thật sự hậu thuẫn</code></pre>
+<p>Khi có ma trận, <strong>bấm "Save to note"</strong> thay vì để nó
+chìm trong luồng chat. Ma trận sẽ nằm ở bảng ghi chú, mở lại được trước
+khi viết bản tổng hợp, khi kiểm tra trích dẫn, hoặc khi làm slide.</p>
+<p>Điều hay: <strong>những mâu thuẫn bề ngoài trở nên hữu ích</strong>
+khi bạn hỏi mỗi nghiên cứu <em>đo cái gì, trên ai, vào lúc nào</em>. Một
+bài không thấy tác động rộng lên việc làm, một bài thấy tin tuyển dụng
+giảm ở vài nghề bị ảnh hưởng, một bài thấy người mới ra trường trong một
+nhóm hẹp đang tệ đi — ba phát hiện đó <strong>có thể khớp với
+nhau</strong>.</p>
+<hr />
+<h3 id="bước-5--chỉ-hỏi-tổng-hợp-sau-khi-đã-có-ma-trận">Bước 5 — Chỉ hỏi
+tổng hợp SAU KHI đã có ma trận</h3>
+<pre><code>Viết một bản tổng hợp bằng ngôn ngữ đơn giản, trả lời:
+[CÂU HỎI CỦA BẠN]
+
+Theo cấu trúc:
+1. Câu trả lời ngắn gọn.
+2. Chỗ nào bằng chứng nói &quot;có&quot; hoặc &quot;có thể&quot;.
+3. Chỗ nào bằng chứng nói &quot;chưa, ít nhất là chưa rộng&quot;.
+4. Vì sao các nghiên cứu khác nhau.
+5. Điều gì vẫn còn chưa chắc chắn.
+
+Dùng trích dẫn xuyên suốt. Không được coi [loại A], [loại B] và [loại C] là cùng
+một kết quả. Không được tỏ ra chắc chắn giả tạo.</code></pre>
+<p>Bản tổng hợp tốt sẽ <strong>giữ cho bất đồng vẫn hiện ra</strong>:
+không giả vờ rằng tin tuyển dụng giảm chứng minh việc làm giảm, và cũng
+không dùng số liệu việc làm quốc gia ổn định để xóa đi những tác động
+hẹp có thật.</p>
+<p>Lưu bản tổng hợp thành một ghi chú nữa.</p>
+<hr />
+<h3
+id="bước-6--lưu-các-câu-hỏi-còn-bỏ-ngỏ-trước-khi-làm-đa-phương-tiện">Bước
+6 — Lưu các câu hỏi còn bỏ ngỏ (trước khi làm đa phương tiện)</h3>
+<pre><code>Dựa trên các nguồn trong notebook này, liệt kê các câu hỏi còn bỏ ngỏ sau ma trận
+bằng chứng và bản tổng hợp đầu tiên.
+
+Sắp xếp thành:
+- lỗ hổng về bằng chứng
+- lỗ hổng về thời điểm
+- lỗ hổng về cách đo lường
+- câu hỏi về nhóm người / lĩnh vực / khu vực cụ thể
+- câu hỏi quan trọng với cách công chúng diễn giải nhưng các nguồn này không trả
+  lời được rõ ràng
+
+Với mỗi câu hỏi bỏ ngỏ, giải thích:
+- vì sao nó quan trọng
+- nguồn nào tiến gần nhất đến việc trả lời nó
+- loại bằng chứng bổ sung nào sẽ trả lời nó tốt hơn
+- nên coi nó là một lưu ý cảnh báo, một hướng nghiên cứu tương lai, hay một lý do
+  để tránh nói quá</code></pre>
+<p>Kết quả đánh dấu <strong>chỗ đống nguồn của bạn hết khả năng trả
+lời</strong>. Nó cho phép bạn giữ lại sự không chắc chắn mà không làm cả
+bài viết trở nên mơ hồ. Lưu luôn thành ghi chú, để nó nằm cạnh ma trận
+và bản tổng hợp.</p>
+<hr />
+<h3 id="bước-7--đa-phương-tiện-có-nhưng-phải-tùy-chỉnh-trước">Bước 7 —
+Đa phương tiện: có, nhưng phải tùy chỉnh trước</h3>
+<p>Cùng một notebook có thể sinh ra: audio, video, slide, báo cáo,
+flashcard, quiz, sơ đồ tư duy, bảng biểu. <strong>Trước khi bấm tạo,
+kiểm tra xem định dạng đó cho tùy chỉnh những gì.</strong> Sơ đồ tư duy
+hỏi bạn muốn map chủ đề nào. Audio Overview cho chọn định dạng, độ dài,
+ngôn ngữ, và prompt trọng tâm.</p>
+<p><strong>Sơ đồ tư duy</strong> — mặc định dễ thành mạng lưới chủ đề
+chung chung. Ép nó thành <em>bản đồ bằng chứng</em>:</p>
+<pre><code>Tạo sơ đồ tư duy về bằng chứng cho câu hỏi: [CÂU HỎI CỦA BẠN].
+
+Tổ chức bản đồ theo LOẠI BẰNG CHỨNG, không theo chủ đề chung.
+
+Các nhánh chính:
+- bằng chứng trực tiếp
+- bằng chứng gián tiếp
+- ước lượng mức độ ảnh hưởng / rủi ro (chưa cho thấy kết quả thực)
+- bằng chứng cho thấy có áp lực
+- bằng chứng cho thấy tác động rộng CHƯA xuất hiện rõ
+- câu hỏi bỏ ngỏ và lưu ý cảnh báo
+
+Dưới mỗi nhánh, ghi các nguồn chính và khẳng định cụ thể mà từng nguồn hậu thuẫn được.
+Giữ [loại A] tách khỏi [loại B]. Giữ [mức độ ảnh hưởng] tách khỏi [thiệt hại thực tế].</code></pre>
+<p>Nếu tất cả rơi vào chung một nhánh, bạn biết ngay: <strong>hình ảnh
+đã làm phẳng bằng chứng.</strong></p>
+<p><strong>Audio Overview</strong> — chọn định dạng Critique hoặc Debate
+thay vì bản tóm tắt đơn giản:</p>
+<pre><code>Tạo một cuộc thảo luận cân bằng giữa hai người dẫn.
+
+Một người bắt đầu từ nỗi lo của công chúng về [chủ đề]. Người kia liên tục quay về
+việc mỗi bài nghiên cứu thật sự đo cái gì. Kết thúc bằng kết luận thận trọng mà các
+nguồn hậu thuẫn.</code></pre>
+<hr />
+<h2 id="cảnh-báo-lớn-nhất-bản-đẹp-nghe-chắc-chắn-hơn-sự-thật">Cảnh báo
+lớn nhất: bản đẹp nghe chắc chắn hơn sự thật</h2>
+<p>Đây là phần trung thực nhất của bài gốc.</p>
+<ul>
+<li><strong>Video:</strong> NotebookLM tự sinh nhân vật, biểu đồ, nhãn,
+chuyển cảnh — trông rất chuyên nghiệp. Nhưng đơn giản hóa vẫn là
+<strong>một cách diễn giải</strong>. Một biểu đồ hoạt hình sạch sẽ có
+thể <strong>âm thầm xóa mất</strong> đúng những lưu ý cảnh báo đã làm
+nên sự cẩn trọng của nghiên cứu gốc.</li>
+<li><strong>Ảnh chụp nguồn trong video có vẻ đáng tin, nhưng không phải
+trích dẫn bấm được.</strong> Người xem không mở được đoạn văn xung quanh
+để kiểm tra.</li>
+<li><strong>Giọng đọc:</strong> mượt đến mức mọi chuyển ý đều nghe như
+đã ngã ngũ — kể cả những câu như AI đang <em>"xóa sổ một cách có hệ
+thống"</em> công việc chuyên môn ở cấp khởi điểm, hay một hiện tượng là
+<em>"thay thế thuần túy"</em>. Đó là những kết luận mạnh, <strong>đi xa
+hơn</strong> bản tổng hợp thận trọng mà chính notebook đó đã viết ra
+trong chat.</li>
+</ul>
+<blockquote>
+<p><strong>Giọng đọc bóng bẩy làm cho việc đơn giản hóa trở nên khó nhận
+ra hơn.</strong></p>
+</blockquote>
+<p>Cách dùng đúng: mỗi định dạng để <strong>bắt một loại lỗi khác
+nhau</strong> — hình ảnh để lộ chỗ trộn lẫn các loại bằng chứng, giọng
+đọc để lộ chỗ nói chắc hơn cả bài nghiên cứu. Coi mọi lời dẫn, mọi hình
+sinh ra, mọi ảnh chụp nguồn <strong>là bản nháp</strong>, không phải sản
+phẩm.</p>
+<hr />
+<h2 id="khi-nào-chuyển-việc-sang-công-cụ-khác">Khi nào chuyển việc sang
+công cụ khác</h2>
+<table>
+<thead>
+<tr>
+<th>Tình huống</th>
+<th>Công cụ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vẫn đang <strong>đi tìm</strong> tài liệu</td>
+<td>Công cụ tìm kiếm / deep research</td>
+</tr>
+<tr>
+<td>Bắt đầu từ <strong>trang trắng</strong></td>
+<td>Trợ lý AI thông thường</td>
+</tr>
+<tr>
+<td><strong>Đã có</strong> bộ nguồn xác định, cần hỏi nhiều câu, câu trả
+lời phải bám vào tài liệu</td>
+<td><strong>NotebookLM</strong></td>
+</tr>
+<tr>
+<td>Đã xong phần nguồn, giờ cần <strong>khuyến nghị, bản nháp, kế hoạch
+hành động</strong></td>
+<td>Claude / ChatGPT / agent</td>
+</tr>
+</tbody>
+</table>
+<p>Cách bàn giao: <strong>không cần NotebookLM tạo gói bàn giao
+riêng.</strong> Ba ghi chú đã lưu chính là gói bàn giao —</p>
+<ul>
+<li><strong>ma trận</strong> ghi lại mỗi nguồn đo cái gì,</li>
+<li><strong>bản tổng hợp</strong> mang câu trả lời thận trọng,</li>
+<li><strong>ghi chú câu hỏi bỏ ngỏ</strong> giữ lại các cảnh báo và lỗ
+hổng.</li>
+</ul>
+<p>Copy các ghi chú đó sang trợ lý khác làm nguyên liệu cho memo, dàn ý,
+bản viết lại, hay quyết định. <strong>Giữ notebook mở trong lúc
+viết</strong> để quay về trích dẫn gốc khi một khẳng định cần soi
+lại.</p>
+<hr />
+<h2 id="tóm-gọn">Tóm gọn</h2>
+<blockquote>
+<p>Bỏ đống nguồn vào một notebook. Hỏi những câu hỏi có trọng tâm. So
+sánh những gì tìm thấy. Lưu lại những mảnh sẽ cần dùng lại. Rồi mới biến
+vật liệu đã kiểm chứng đó thành thứ mà công việc đòi hỏi.</p>
+</blockquote>
+<p><strong>Khi bạn bắt đầu với một bộ nguồn đã xác định, hãy bắt đầu ở
+NotebookLM.</strong></p>
+</article><aside><strong>Put this to work on your next task.</strong><p>Take the free workflow scorecard for a suggested next step.</p><a class="button navy" href="../index.html#scorecard">Find your next step <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></aside></main></body></html>

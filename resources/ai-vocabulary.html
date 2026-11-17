@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Understand what broke in your AI workflow · Tim Tran</title><link rel="icon" href="../assets/favicon.svg"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="reading.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&amp;family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"></head><body><header><div class="wrap navrow"><a class="brand" href="../index.html">tim tran<span>.</span><small>PRACTICAL AI FOR YOUR REAL WORK</small></a><a class="text-link" href="../index.html#resources">All resources <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></div></header><main class="reading"><h1 id="understand-what-broke-in-your-ai-workflow">Understand what broke
+in your AI workflow</h1><p class="reading-intro">Twelve useful AI terms, adapted for office work, with credit to Matt Pocock’s dictionary.</p><a class="button navy" href="ai-vocabulary.md" download>Download this guide <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a><article><!-- Adapted for public reading from Tim’s resource library. -->
+
+
+<p><strong>Source:</strong> Matt Pocock — <em>AI Coding Dictionary</em>
+(github.com/mattpocock/dictionary-of-ai-coding ·
+aicodingdictionary.com).</p>
+<h2 id="the-12">The 12</h2>
+<ol type="1">
+<li><strong>Model</strong> — the stateless engine (parameters). It knows
+nothing about <em>you</em> on its own; every run starts blank.</li>
+<li><strong>Harness</strong> — everything wrapped around the model: the
+context, tools, permissions, files, prompts, loops, and checks. Most
+failures people blame on "the AI" live here, not in the model.</li>
+<li><strong>Context</strong> — what you actually hand the model this
+turn. <strong>The one lever you control.</strong> Project-specific
+knowledge must <em>arrive</em> through context — the model did not
+"learn" it.</li>
+<li><strong>Token</strong> — the unit the model reads and writes, and
+the unit you're billed in. Explains why a long document costs more and
+why bills vary.</li>
+<li><strong>Tool call</strong> — the model asking to <em>do</em>
+something (search, run code, read a file) rather than just talk. What
+turns a chatbot into an agent.</li>
+<li><strong>Permission</strong> — the boundary on what a tool call is
+allowed to do. "Can it edit files? send email?" — set before you go
+hands-off.</li>
+<li><strong>Sandbox</strong> — a walled space where the agent can act
+without touching anything real. Where you let it try things safely.</li>
+<li><strong>Automated check</strong> — a <em>deterministic</em> test:
+word count, file exists, valid format. Either passes or fails, no
+judgment.</li>
+<li><strong>Automated review</strong> — the model judging output.
+Useful, but it's <em>opinion</em>, not a guaranteed check. (Confusing
+these two is a top failure.)</li>
+<li><strong>Human review</strong> — <strong>you reading the actual
+artifact</strong> — the draft, the diff, the spreadsheet. Reading the
+agent's <em>summary</em> of what it did does not count.</li>
+<li><strong>AFK ("away from keyboard")</strong> — letting the agent run
+unattended. Only safe once ambiguity, sandbox, checks, and a review
+surface are all handled.</li>
+<li><strong>AX (agent experience)</strong> — how fit your
+files/repo/setup are <em>for an agent to work in</em> — separate from
+how convenient they are for a human (DX). Improving AX is why cleanup
+pays off.</li>
+</ol>
+<h2 id="caveats">Caveats</h2>
+<ul>
+<li>Vocabulary ≠ discipline. Knowing "human review" is not doing it —
+pair each term with the behavior it names.</li>
+<li>Some terms will age as products converge; revisit when the
+underlying tools shift.</li>
+</ul>
+</article><aside><strong>Put this to work on your next task.</strong><p>Take the free workflow scorecard for a suggested next step.</p><a class="button navy" href="../index.html#scorecard">Find your next step <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a></aside></main></body></html>
