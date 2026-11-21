@@ -32,15 +32,17 @@
     const text=['MY AI WORKFLOW SNAPSHOT','Self-reported reflection, not a proficiency test.',`${data.answered} of 12 questions answered`,r.title,r.cost,'NEXT STEP: '+r.action,'',...model.questions.map((q,i)=>`${i+1}. ${q.title}\n${answers[i]===null?'Not answered':q.options[answers[i]]}`),'','Tim Tran — timqtran1008@gmail.com'].join('\n\n');
     const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='my-ai-workflow-snapshot.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
+  const emailForm=document.querySelector('#scorecard-email-form');
   const email=document.querySelector('#scorecard-email'),send=document.querySelector('#scorecard-email-send'),status=document.querySelector('#scorecard-email-status');
   const LEADS='https://docs.google.com/forms/d/e/1FAIpQLSd46CsoWIgL46joaZlhXY0rsNkbk10IPjSWu9sda4QUZlrpKA/formResponse';
-  send.addEventListener('click',()=>{
-    const address=(email.value||'').trim();
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)){status.textContent='Please enter a valid email address.';email.focus();return;}
+  emailForm.addEventListener('submit',event=>{
+    event.preventDefault();
+    if(send.disabled)return;
+    const address=email.value.trim();
     const data=model.analyse(answers),r=data.recommendation,body=new URLSearchParams();
     body.set('entry.1595574200',address);body.set('entry.1458386879',`${data.answered}/12 answered · ${r.title}`);
     body.set('entry.816692617',model.questions.map((q,i)=>`${i+1}. ${q.title} — ${answers[i]===null?'Not answered':q.options[answers[i]]}`).join('\n'));
     send.disabled=true;status.textContent='Sending…';
-    fetch(LEADS,{method:'POST',mode:'no-cors',body}).then(()=>{status.textContent='Sent. Tim replies by email with one next step.';}).catch(()=>{send.disabled=false;status.textContent='That did not send. Please email timqtran1008@gmail.com instead.';});
+    fetch(LEADS,{method:'POST',mode:'no-cors',body}).then(()=>{status.textContent='Your request was submitted. Delivery could not be confirmed. If you don?t hear back, email timqtran1008@gmail.com.';}).catch(()=>{send.disabled=false;status.textContent='That did not send. Please email timqtran1008@gmail.com instead.';});
   });
 })();
