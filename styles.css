@@ -104,6 +104,7 @@ main>section:not(.hero){padding-block:var(--section-space)}.section-heading{disp
  .contact-bottom{grid-template-columns:1fr;gap:28px;margin-top:28px}.contact-bottom>p{font-size:17px}#contact h2{font-size:clamp(2.2rem,9.5vw,3.4rem)}.contact-bottom .button{width:100%}.contact-help{font-size:13px}.footer-row{flex-wrap:wrap;gap:12px 24px;padding-block:24px}.footer-row .brand{font-size:25px}.footer-row p{font-size:13px;flex:1 1 50%}.footer-row>a:not(.brand){font-size:13px}
 }
 @media(max-width:360px){.wrap{padding-inline:18px}.system{padding:20px}.system-top,.system-foot{font-size:12px}.scorecard-box{padding:20px}.about-mark>span{font-size:31px}.offer-card{padding:22px}.brand small{font-size:10px}.menu-toggle{padding-inline:10px}.question-meta{flex-wrap:wrap}}
+@media(max-width:390px){.cohort-card .system-intro{font-size:20px}}
 @media(max-width:340px){.menu-toggle:not([hidden]){padding-inline:7px}.menu-toggle .icon{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button,.system-step{transition:none}}
 .result-email{margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.25)}.result-email label{display:block;font-size:15px;line-height:1.6;max-width:52ch}.result-email-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.result-email-row input{flex:1 1 220px;min-height:48px;padding:12px 14px;border:1px solid rgba(255,255,255,.5);border-radius:var(--radius);background:var(--white);color:var(--navy);font:inherit;font-size:16px}.result-email-status{font-size:13px;line-height:1.6;margin-top:10px}
