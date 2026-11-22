@@ -24,7 +24,7 @@ form.addEventListener('submit', event => {
   resultHeading.textContent = missing.length ? title : 'Ready to scope a pilot';
   resultCopy.textContent = missing.length
     ? 'Use these steps to prepare the workflow with your team.'
-    : 'Tell Tim which workflow you want to test and who owns it. Tim helps measure the current process and build a quality checklist at the start of the pilot.';
+    : 'Tell Tim which workflow you want to test and who owns it. Tim and his team help measure the current process and build a quality checklist at the start of the pilot.';
   resultActions.replaceChildren();
   for (const [, action] of missing) {
     const item = document.createElement('li');
