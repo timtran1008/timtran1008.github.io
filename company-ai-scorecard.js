@@ -24,7 +24,7 @@ form.addEventListener('submit', event => {
   resultHeading.textContent = missing.length ? title : 'Ready to scope your deployment';
   resultCopy.textContent = missing.length
     ? 'Use these steps to prepare the workflow with your team.'
-    : 'Tell Tim which workflow you want to deploy first and who owns it. Our AI ROI Taskforce measures the current process and builds a quality checklist from day one.';
+    : 'Tell us which workflow you want to deploy first and who owns it. Our AI ROI Taskforce measures the current process and builds a quality checklist from day one.';
   resultActions.replaceChildren();
   for (const [, action] of missing) {
     const item = document.createElement('li');
