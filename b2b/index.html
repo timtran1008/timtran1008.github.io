@@ -19,6 +19,85 @@
     .team-grid .text-link { align-self: start; margin-top: auto; padding-top: 16px; }
     .workflow-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
     .workflow-tags span { border: 1px solid #ffffff33; border-radius: 4px; padding: 8px 12px; font-size: 13px; color: var(--on-dark); }
+    /* --- where you are / where you get to --- */
+    .state-grid { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 18px; align-items: stretch; }
+    .state-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); padding: 30px; display: flex; flex-direction: column; }
+    .state-card.after { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .state-tag { font: 800 12px/1 var(--display); letter-spacing: .12em; color: #b3261e; }
+    .after .state-tag { color: var(--yellow); }
+    .state-card h3 { margin-top: 12px; font-size: 24px; }
+    .state-card svg { width: 100%; height: auto; margin: 22px 0 18px; }
+    .state-card svg text { font-family: var(--body); font-size: 13px; font-weight: 600; }
+    .state-card ul { margin: auto 0 0; padding-inline-start: 20px; font-size: 15px; line-height: 1.6; }
+    .state-card li + li { margin-top: 6px; }
+    .state-card.today ul { color: var(--muted); }
+    .state-card.after ul { color: var(--on-dark); }
+    .state-arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font: 800 11px/1.3 var(--display); letter-spacing: .1em; text-align: center; color: var(--navy); }
+    .state-arrow svg { width: 56px; height: 56px; }
+    .shift { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 18px; align-items: stretch; margin-bottom: 30px; }
+    .shift > div { display: flex; flex-direction: column; gap: 6px; }
+    .shift strong { font: 900 clamp(1.5rem, 2.6vw, 2.1rem)/1.1 var(--display); letter-spacing: -.02em; }
+    .shift span { font: 700 18px/1.4 var(--display); letter-spacing: -.01em; }
+    .shift-from { border-left: 5px solid #b3261e; padding-left: 18px; }
+    .shift-from strong { color: #b3261e; }
+    .shift-from span { color: var(--muted); }
+    .shift-to { border-left: 5px solid var(--yellow); padding-left: 18px; }
+    .shift-mid { align-items: center; justify-content: center; font: 900 34px/1 var(--display); color: var(--navy); }
+    .example-label { font-size: 15px; color: var(--muted); margin-bottom: 16px; }
+    .example-label strong { font: 800 12px/1 var(--display); letter-spacing: .12em; color: var(--navy); background: var(--yellow); padding: 5px 9px; border-radius: 4px; margin-right: 10px; }
+    @media (max-width: 950px) { .shift { grid-template-columns: 1fr; gap: 14px; } .shift-mid { transform: rotate(90deg); } .example-label strong { display: inline-block; margin-bottom: 8px; } }
+    /* --- journey map --- */
+    .journey-ends { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 26px; font: 800 12px/1.4 var(--display); letter-spacing: .08em; }
+    .journey-ends span { padding: 9px 14px; border-radius: 4px; border: 2px solid var(--navy); }
+    .journey-ends span:last-child { background: var(--navy); color: var(--yellow); }
+    .journey { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); row-gap: 40px; }
+    .journey li { position: relative; padding-right: 18px; }
+    .journey li::before { content: ""; position: absolute; top: 21px; left: 0; right: 0; height: 3px; background: var(--navy); }
+    .journey li.pre::before { background: repeating-linear-gradient(90deg, var(--navy) 0 8px, transparent 8px 14px); }
+    .j-num { position: relative; z-index: 1; display: block; width: 45px; height: 45px; border-radius: 50%; background: var(--yellow); color: var(--navy); border: 3px solid var(--navy); font: 900 18px/39px var(--display); text-align: center; }
+    .j-phase { display: block; min-height: 18px; margin-top: 14px; font: 800 11px/1.5 var(--display); letter-spacing: .1em; color: #755a00; }
+    .journey h3 { font-size: 18px; line-height: 1.25; margin-top: 4px; }
+    .j-time { display: inline-block; margin-top: 8px; padding: 3px 9px; border-radius: 99px; background: var(--navy); color: var(--white); font-size: 12px; font-weight: 700; }
+    .journey dl { margin: 14px 0 0; font-size: 14px; line-height: 1.55; }
+    .journey dt { font: 800 11px/1.5 var(--display); letter-spacing: .1em; color: var(--muted); margin-top: 12px; }
+    .journey dd { margin: 2px 0 0; }
+    .journey dd.get { font-weight: 700; }
+    .j-who { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .j-who span { border: 1px solid var(--navy); border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700; background: var(--white); }
+    .journey-next { margin-top: 38px; padding: 20px 24px; border-left: 4px solid var(--yellow); background: var(--white); font-size: 16px; }
+    /* shared rows across the six columns, so YOU / THE TASKFORCE / YOU GET line up */
+    @media (min-width: 951px) {
+      .journey { row-gap: 0; }
+      .journey li { display: grid; grid-template-rows: subgrid; grid-row: span 11; }
+      .journey li > .j-num { grid-row: 1; }
+      .journey li > .j-phase { grid-row: 2; }
+      .journey li > h3 { grid-row: 3; }
+      .journey li > .j-time { grid-row: 4; justify-self: start; align-self: start; }
+      .journey dl { display: contents; }
+      .journey dt:nth-of-type(1) { grid-row: 5; margin-top: 16px; }
+      .journey dd:nth-of-type(1) { grid-row: 6; }
+      .journey dt:nth-of-type(2) { grid-row: 7; }
+      .journey dd:nth-of-type(2) { grid-row: 8; }
+      .journey dt:nth-of-type(3) { grid-row: 9; }
+      .journey dd:nth-of-type(3) { grid-row: 10; }
+      .journey li > .j-who { grid-row: 11; align-self: start; }
+    }
+    @media (min-width: 951px) and (max-width: 1150px) { .journey li > .j-who { padding-bottom: 40px; } }
+    @media (max-width: 1150px) { .journey { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 950px) {
+      .state-grid { grid-template-columns: 1fr; }
+      .state-arrow { flex-direction: row; padding-block: 4px; }
+      .state-arrow svg { transform: rotate(90deg); width: 44px; height: 44px; }
+      .state-card { padding: 24px; }
+      .journey-ends { flex-direction: column; align-items: flex-start; }
+      .journey { grid-template-columns: 1fr; row-gap: 0; }
+      .journey li { padding: 0 0 34px 64px; }
+      .journey li::before, .journey li.pre::before { top: 0; bottom: 0; left: 21px; right: auto; width: 3px; height: auto; background: var(--navy); }
+      .journey li.pre::before { background: repeating-linear-gradient(180deg, var(--navy) 0 8px, transparent 8px 14px); }
+      .journey li:last-child::before { bottom: auto; height: 45px; }
+      .j-num { position: absolute; left: 0; top: 0; }
+      .j-phase { margin-top: 0; min-height: 0; }
+    }
   </style>
 </head>
 <body>
@@ -28,7 +107,8 @@
       <a href="./" class="brand">ai roi taskforce<span>.</span><small>MEASURABLE AI DEPLOYMENT</small></a>
       <button class="menu-toggle" type="button" popovertarget="navigation" hidden>Menu <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
       <nav id="navigation" aria-label="B2B navigation">
-        <a href="#how-we-work">How we work</a>
+        <a href="#today-vs-after">Before &amp; after</a>
+        <a href="#how-we-work">The journey</a>
         <a href="#where-we-start">Where we start</a>
         <a href="#team">The taskforce</a>
         <a href="scorecard.html">Readiness check</a>
@@ -91,30 +171,186 @@
       </div>
     </div>
 
+    <section id="today-vs-after" tabindex="-1" aria-labelledby="state-heading">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><h2 id="state-heading">WHERE YOU ARE.<br>WHERE YOU SHOULD BE.</h2></div>
+          <p>Most companies are AI-adapt: the tools arrived, and the work stayed the same. The return comes when the company goes AI-first and changes how the work itself runs.</p>
+        </div>
+        <div class="shift">
+          <div class="shift-from"><strong>AI-ADAPT</strong><span>“We have AI. Now what?”</span></div>
+          <div class="shift-mid" aria-hidden="true">→</div>
+          <div class="shift-to"><strong>AI-FIRST</strong><span>“We take full advantage of AI. What has to change?”</span></div>
+        </div>
+        <p class="example-label"><strong>ONE EXAMPLE OF THE SHIFT</strong> The weekly or monthly management meeting. The same shift applies to any recurring work in your company.</p>
+        <div class="state-grid">
+          <article class="state-card today">
+            <span class="state-tag">WHERE YOU ARE · AI-ADAPT</span>
+            <h3>Everyone has AI. The meeting still runs the pre-AI way.</h3>
+            <svg viewBox="0 0 460 320" role="img" aria-label="Today: Sales, Operations and HR each prepare a report alone. Nothing is shared before the meeting, so the head hears every report for the first time and the hour goes to reporting.">
+              <defs>
+                <marker id="ah-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#11223e"/></marker>
+              </defs>
+              <g fill="#eceee7" stroke="#11223e" stroke-width="1.5">
+                <rect x="47" y="14" width="104" height="52" rx="4"/><rect x="178" y="14" width="104" height="52" rx="4"/><rect x="309" y="14" width="104" height="52" rx="4"/>
+                <rect x="47" y="150" width="366" height="68" rx="4" fill="#ffffff"/>
+              </g>
+              <rect x="90" y="262" width="280" height="44" rx="4" fill="#ffffff" stroke="#b3261e" stroke-width="2"/>
+              <g fill="#11223e" text-anchor="middle">
+                <text x="99" y="36" style="font-weight:700">Sales</text><text x="230" y="36" style="font-weight:700">Operations</text><text x="361" y="36" style="font-weight:700">HR</text>
+                <text x="99" y="54" style="font-size:11px">prepares alone</text><text x="230" y="54" style="font-size:11px">prepares alone</text><text x="361" y="54" style="font-size:11px">prepares alone</text>
+                <text x="230" y="178" style="font-weight:700">The meeting</text>
+                <text x="230" y="200">The head hears every report for the first time</text>
+              </g>
+              <g stroke="#b3261e" stroke-width="2.5" stroke-linecap="round">
+                <path d="M158 33 171 46M171 33 158 46"/><path d="M289 33 302 46M302 33 289 46"/>
+              </g>
+              <g stroke="#11223e" stroke-width="1.5" fill="none" marker-end="url(#ah-ink)">
+                <path d="M99 66V148"/><path d="M230 66V148"/><path d="M361 66V148"/><path d="M230 218V260"/>
+              </g>
+              <g fill="#b3261e" text-anchor="middle">
+                <text x="164" y="104">no shared</text><text x="164" y="120">source</text>
+                <text x="296" y="104">head sees</text><text x="296" y="120">nothing</text>
+                <text x="230" y="289" style="font-weight:700">Hour spent reporting. Decisions wait.</text>
+              </g>
+            </svg>
+            <ul>
+              <li>Each team prepares alone. No team sees what the others did, or where their work connects.</li>
+              <li>The head walks in blind and hears every report for the first time.</li>
+              <li>Everyone expects sharp questions and direction on the spot. The hour goes to reporting.</li>
+            </ul>
+          </article>
+
+          <div class="state-arrow" aria-hidden="true">
+            <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#ffcc00" stroke="#0b2046" stroke-width="3"/><path d="M16 28h22m-9-9 9 9-9 9" fill="none" stroke="#0b2046" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>6 TOUCH<wbr>POINTS</span>
+          </div>
+
+          <article class="state-card after">
+            <span class="state-tag">WHERE YOU SHOULD BE · AI-FIRST</span>
+            <h3>The head reads first. The meeting is for decisions.</h3>
+            <svg viewBox="0 0 460 320" role="img" aria-label="Where you should be: each team's report goes into one shared source linked across teams. The head reviews it with AI and sends questions before the meeting. The meeting is for solving problems and deciding.">
+              <defs>
+                <marker id="ah-yel" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#ffcc00"/></marker>
+              </defs>
+              <g fill="#112b53" stroke="#c4d0e3" stroke-width="1.5">
+                <rect x="47" y="14" width="104" height="34" rx="4"/><rect x="178" y="14" width="104" height="34" rx="4"/><rect x="309" y="14" width="104" height="34" rx="4"/>
+              </g>
+              <g fill="#ffcc00">
+                <rect x="95" y="92" width="270" height="46" rx="4"/>
+                <rect x="140" y="174" width="180" height="52" rx="4"/>
+                <rect x="110" y="264" width="240" height="44" rx="4"/>
+              </g>
+              <g fill="#c4d0e3" text-anchor="middle">
+                <text x="99" y="36">Sales</text><text x="230" y="36">Operations</text><text x="361" y="36">HR</text>
+              </g>
+              <g fill="#0b2046" text-anchor="middle" style="font-weight:700">
+                <text x="230" y="120">One shared source, linked across teams</text>
+                <text x="230" y="196">Head reviews with AI,</text>
+                <text x="230" y="213">sends questions ahead</text>
+                <text x="230" y="291">Meeting: solve and decide</text>
+              </g>
+              <g stroke="#ffcc00" stroke-width="2.5" fill="none" marker-end="url(#ah-yel)">
+                <path d="M99 48 200 90"/><path d="M230 48V90"/><path d="M361 48 260 90"/>
+                <path d="M230 138V172"/><path d="M230 226V262"/>
+              </g>
+              <path d="M110 200H138" fill="none" stroke="#c4d0e3" stroke-width="1.2" stroke-dasharray="3 4"/>
+              <g fill="#ffffff" text-anchor="end">
+                <text x="104" y="196">before the</text><text x="104" y="212">meeting</text>
+              </g>
+            </svg>
+            <ul>
+              <li>Each team’s report lands in one shared source, connected to the other teams’ work.</li>
+              <li>The head reads it with AI before the meeting and sends questions and concerns ahead.</li>
+              <li>The meeting is only for solving problems and making decisions.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="how-we-work" class="own-setup" tabindex="-1" aria-labelledby="how-heading">
       <div class="wrap">
         <div class="section-heading">
-          <div><h2 id="how-heading">HOW THE TASKFORCE WORKS</h2></div>
-          <p>A faster first draft helps one person. When the team still spends just as long collecting inputs, correcting figures, or getting sign-off, that is where we deploy.</p>
+          <div><h2 id="how-heading">THE JOURNEY: 6 TOUCHPOINTS</h2></div>
+          <p>Each touchpoint shows what we need from you, what the taskforce does, and what you hold at the end of it. The first three happen before you commit to anything.</p>
         </div>
-        <div class="offer-grid">
-          <article class="offer-card">
-            <h3>1. Follow the work end to end</h3>
-            <p>We sit with the people who do and review the work. We locate where time and quality are lost—whether the bottleneck sits in the tools, the instructions, or the handoffs between people.</p>
-          </article>
-          <article class="offer-card">
-            <h3>2. Agree on a result you can measure</h3>
-            <p>We select one high-friction workflow that matters to leadership and record the baseline: how long it takes to reach a review-ready draft and how many corrections a reviewer makes.</p>
-          </article>
-          <article class="offer-card">
-            <h3>3. Build and test in your workspace</h3>
-            <p>We deploy the workflow inside your company-approved AI tools using approved examples and data, then test it on real work with the people who will run and review it.</p>
-          </article>
-          <article class="offer-card">
-            <h3>4. Hand over and verify the return</h3>
-            <p>We hand over the setup, review checklist, and walkthrough to a named owner. Then we check back after rollout to verify adoption and compare results against the baseline—so you have hard evidence before expanding.</p>
-          </article>
+        <div class="journey-ends" aria-hidden="true">
+          <span>START: AI PAID FOR, WORK UNCHANGED</span>
+          <span>END: MEASURED RETURN ON ONE WORKFLOW</span>
         </div>
+        <ol class="journey">
+          <li class="pre">
+            <span class="j-num">1</span>
+            <span class="j-phase">BEFORE YOU COMMIT</span>
+            <h3>First conversation</h3>
+            <span class="j-time">25 minutes</span>
+            <dl>
+              <dt>YOU</dt><dd>Tell us which AI tools you pay for and where the work has barely changed.</dd>
+              <dt>THE TASKFORCE</dt><dd>Listens, asks about one recurring deliverable, and checks five readiness points.</dd>
+              <dt>YOU GET</dt><dd class="get">One candidate workflow, named.</dd>
+            </dl>
+            <div class="j-who"><span>Tim</span></div>
+          </li>
+          <li class="pre">
+            <span class="j-num">2</span>
+            <span class="j-phase"></span>
+            <h3>Real-run walkthrough</h3>
+            <span class="j-time">30–45 minutes</span>
+            <dl>
+              <dt>YOU</dt><dd>Lend us the person who runs the work and the person who reviews it.</dd>
+              <dt>THE TASKFORCE</dt><dd>Follows last week’s real run end to end and marks where time and quality are lost.</dd>
+              <dt>YOU GET</dt><dd class="get">A clear picture of where the rework comes from.</dd>
+            </dl>
+            <div class="j-who"><span>Tim</span><span>Kyle</span></div>
+          </li>
+          <li class="pre">
+            <span class="j-num">3</span>
+            <span class="j-phase"></span>
+            <h3>Baseline and one bounded scope</h3>
+            <span class="j-time">20 minutes, live</span>
+            <dl>
+              <dt>YOU</dt><dd>Agree on the result worth measuring and decide yes or no.</dd>
+              <dt>THE TASKFORCE</dt><dd>Records the baseline. All four of us sign off before we present one fixed scope.</dd>
+              <dt>YOU GET</dt><dd class="get">Scope, success test, timeline and a fixed fee in VND.</dd>
+            </dl>
+            <div class="j-who"><span>Tinh</span><span>All four</span></div>
+          </li>
+          <li>
+            <span class="j-num">4</span>
+            <span class="j-phase">AFTER YOU SIGN</span>
+            <h3>Build and test in your workspace</h3>
+            <dl>
+              <dt>YOU</dt><dd>Your workflow owner tests it on real work. Your reviewer says what good looks like.</dd>
+              <dt>THE TASKFORCE</dt><dd>Builds inside your approved AI tools, using approved examples and data.</dd>
+              <dt>YOU GET</dt><dd class="get">A working setup, tested on your own inputs.</dd>
+            </dl>
+            <div class="j-who"><span>Kyle</span><span>Tim</span></div>
+          </li>
+          <li>
+            <span class="j-num">5</span>
+            <span class="j-phase"></span>
+            <h3>Handover to a named owner</h3>
+            <dl>
+              <dt>YOU</dt><dd>Name the person who owns the workflow after we leave.</dd>
+              <dt>THE TASKFORCE</dt><dd>Hands over the setup, the review checklist and a live walkthrough.</dd>
+              <dt>YOU GET</dt><dd class="get">A workflow your team runs without us.</dd>
+            </dl>
+            <div class="j-who"><span>Long</span></div>
+          </li>
+          <li>
+            <span class="j-num">6</span>
+            <span class="j-phase"></span>
+            <h3>Adoption check and the return</h3>
+            <dl>
+              <dt>YOU</dt><dd>Read one comparison and decide whether to expand.</dd>
+              <dt>THE TASKFORCE</dt><dd>Checks back after rollout, confirms real use, and measures against the baseline.</dd>
+              <dt>YOU GET</dt><dd class="get">A before-and-after memo with your own numbers.</dd>
+            </dl>
+            <div class="j-who"><span>Tinh</span><span>Long</span></div>
+          </li>
+        </ol>
+        <p class="journey-next"><strong>Then you choose the next workflow.</strong> Most companies have five or ten in mind. The first one gives you the evidence to rank the others.</p>
       </div>
     </section>
 
