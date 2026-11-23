@@ -8,7 +8,7 @@ const inquiry = document.querySelector('#pilot-inquiry');
 const preparation = new Map([
   ['workflow', 'Pick a recurring task with a clear output, such as a weekly team report.'],
   ['owner', 'Name the person who will test the setup and run it after handover.'],
-  ['access', 'Confirm which AI tool and example inputs the company approves for the pilot.'],
+  ['access', 'Confirm which AI tool and example inputs the company approves for deployment.'],
   ['baseline', 'Confirm who can time one typical run from raw inputs to a review-ready draft.'],
   ['quality', 'Identify the reviewer who can describe what a good first draft needs.'],
 ]);
@@ -19,12 +19,12 @@ form.addEventListener('submit', event => {
   const missing = [...preparation].filter(([field]) => answers.get(field) !== 'ready');
   const title = answers.get('workflow') !== 'ready'
     ? 'Choose a workflow first'
-    : 'Prepare the workflow for a pilot';
+    : 'Prepare the workflow for deployment';
 
-  resultHeading.textContent = missing.length ? title : 'Ready to scope a pilot';
+  resultHeading.textContent = missing.length ? title : 'Ready to scope your deployment';
   resultCopy.textContent = missing.length
     ? 'Use these steps to prepare the workflow with your team.'
-    : 'Tell Tim which workflow you want to test and who owns it. Tim and his team help measure the current process and build a quality checklist at the start of the pilot.';
+    : 'Tell Tim which workflow you want to deploy first and who owns it. Our AI ROI Taskforce measures the current process and builds a quality checklist from day one.';
   resultActions.replaceChildren();
   for (const [, action] of missing) {
     const item = document.createElement('li');
