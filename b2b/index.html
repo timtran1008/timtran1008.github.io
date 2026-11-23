@@ -35,13 +35,15 @@
     .state-arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font: 800 11px/1.3 var(--display); letter-spacing: .1em; text-align: center; color: var(--navy); }
     .state-arrow svg { width: 56px; height: 56px; }
     .shift { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 18px; align-items: stretch; margin-bottom: 30px; }
-    .shift > div { display: flex; flex-direction: column; gap: 6px; }
-    .shift strong { font: 900 clamp(1.5rem, 2.6vw, 2.1rem)/1.1 var(--display); letter-spacing: -.02em; }
-    .shift span { font: 700 18px/1.4 var(--display); letter-spacing: -.01em; }
-    .shift-from { border-left: 5px solid #b3261e; padding-left: 18px; }
+    .shift > span { display: flex; flex-direction: column; gap: 8px; }
+    .shift small { font: 800 13px/1 var(--display); letter-spacing: .12em; color: var(--muted); }
+    .shift strong { font: 900 clamp(2.2rem, 4.6vw, 3.6rem)/1 var(--display); letter-spacing: -.03em; }
+    .shift em { font: 700 clamp(1.05rem, 1.7vw, 1.35rem)/1.35 var(--display); letter-spacing: -.01em; }
+    .shift-from { border-left: 6px solid #b3261e; padding-left: 20px; }
     .shift-from strong { color: #b3261e; }
-    .shift-from span { color: var(--muted); }
-    .shift-to { border-left: 5px solid var(--yellow); padding-left: 18px; }
+    .shift-from em { color: var(--muted); }
+    .shift-lead { max-width: 68ch; font-size: 17px; color: var(--muted); margin-bottom: 34px; }
+    .shift-to { border-left: 6px solid var(--yellow); padding-left: 20px; }
     .shift-mid { align-items: center; justify-content: center; font: 900 34px/1 var(--display); color: var(--navy); }
     .example-label { font-size: 15px; color: var(--muted); margin-bottom: 16px; }
     .example-label strong { font: 800 12px/1 var(--display); letter-spacing: .12em; color: var(--navy); background: var(--yellow); padding: 5px 9px; border-radius: 4px; margin-right: 10px; }
@@ -173,19 +175,16 @@
 
     <section id="today-vs-after" tabindex="-1" aria-labelledby="state-heading">
       <div class="wrap">
-        <div class="section-heading">
-          <div><h2 id="state-heading">WHERE YOU ARE.<br>WHERE YOU SHOULD BE.</h2></div>
-          <p>Most companies are AI-adapt: the tools arrived, and the work stayed the same. The return comes when the company goes AI-first and changes how the work itself runs.</p>
-        </div>
-        <div class="shift">
-          <div class="shift-from"><strong>AI-ADAPT</strong><span>“We have AI. Now what?”</span></div>
-          <div class="shift-mid" aria-hidden="true">→</div>
-          <div class="shift-to"><strong>AI-FIRST</strong><span>“We take full advantage of AI. What has to change?”</span></div>
-        </div>
+        <h2 id="state-heading" class="shift">
+          <span class="shift-from"><small>WHERE YOU ARE</small><strong>AI-ADAPT</strong><em>“We have AI. Now what?”</em></span>
+          <span class="shift-mid" aria-hidden="true">→</span>
+          <span class="shift-to"><small>WHERE YOU SHOULD BE</small><strong>AI-FIRST</strong><em>“We take full advantage of AI. What has to change?”</em></span>
+        </h2>
+        <p class="shift-lead">Most companies are AI-adapt: the tools arrived, and the work stayed the same. The return comes when the company goes AI-first and changes how the work itself runs.</p>
         <p class="example-label"><strong>ONE EXAMPLE OF THE SHIFT</strong> The weekly or monthly management meeting. The same shift applies to any recurring work in your company.</p>
         <div class="state-grid">
           <article class="state-card today">
-            <span class="state-tag">WHERE YOU ARE · AI-ADAPT</span>
+            <span class="state-tag">AI-ADAPT · THE MEETING TODAY</span>
             <h3>Everyone has AI. The meeting still runs the pre-AI way.</h3>
             <svg viewBox="0 0 460 320" role="img" aria-label="Today: Sales, Operations and HR each prepare a report alone. Nothing is shared before the meeting, so the head hears every report for the first time and the hour goes to reporting.">
               <defs>
@@ -227,7 +226,7 @@
           </div>
 
           <article class="state-card after">
-            <span class="state-tag">WHERE YOU SHOULD BE · AI-FIRST</span>
+            <span class="state-tag">AI-FIRST · THE MEETING AS IT SHOULD RUN</span>
             <h3>The head reads first. The meeting is for decisions.</h3>
             <svg viewBox="0 0 460 320" role="img" aria-label="Where you should be: each team's report goes into one shared source linked across teams. The head reviews it with AI and sends questions before the meeting. The meeting is for solving problems and deciding.">
               <defs>
