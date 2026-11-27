@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI ROI Taskforce · Measurable AI Deployment for Businesses</title>
-  <meta name="description" content="Already paying for AI across your company, and the work has not changed? Our four-person AI ROI Taskforce moves one recurring workflow from AI-adapt to AI-first inside your approved tools and measures the return.">
+  <meta name="description" content="Bought AI for your teams, and the work hasn't changed? Our four-person AI ROI Taskforce fixes one workflow in 7 days, inside your approved AI tools, and measures the return. You pay only if it works.">
   <meta name="theme-color" content="#0b2046">
   <link rel="icon" href="../assets/favicon.svg">
-  <link rel="stylesheet" href="../styles.css?v=homepage-layout-16">
+  <link rel="stylesheet" href="../styles.css?v=homepage-layout-17">
   <script src="../app.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +17,10 @@
     .team-grid h3 { margin: 0; }
     .team-grid .offer-benefit { margin: 8px 0 12px; font-size: 17px; }
     .team-grid .text-link { align-self: start; margin-top: auto; padding-top: 16px; }
-    .workflow-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .workflow-tags span { border: 1px solid #ffffff33; border-radius: 4px; padding: 8px 12px; font-size: 13px; color: var(--on-dark); }
+    .workflow-tags { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+    .workflow-tags span { border: 1px solid #ffffff33; border-radius: 4px; padding: 12px 14px; font-size: 13px; line-height: 1.45; color: var(--on-dark); }
+    .workflow-tags strong { display: block; color: var(--yellow); font-size: 14px; margin-bottom: 3px; }
+    @media (max-width: 480px) { .workflow-tags { grid-template-columns: 1fr; } }
     /* --- where you are / where you get to --- */
     .state-grid { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 18px; align-items: stretch; }
     .state-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); padding: 30px; display: flex; flex-direction: column; }
@@ -28,7 +30,9 @@
     .state-card h3 { margin-top: 12px; font-size: 24px; }
     .state-card svg { width: 100%; height: auto; margin: 22px 0 18px; }
     .state-card svg text { font-family: var(--body); font-size: 13px; font-weight: 600; }
-    .state-card ul { margin: auto 0 0; padding-inline-start: 20px; font-size: 15px; line-height: 1.6; }
+    .section-heading > p { max-width: none; }
+    @media (width > 950px) { .section-heading { grid-template-columns: 1fr 1fr; column-gap: 54px; } }
+    .state-card ul { margin: 0; padding-inline-start: 20px; font-size: 15px; line-height: 1.6; }
     .state-card li + li { margin-top: 6px; }
     .state-card.today ul { color: var(--muted); }
     .state-card.after ul { color: var(--on-dark); }
@@ -125,11 +129,13 @@
         <div class="hero-grid">
           <div>
             <h1>YOU BOUGHT AI FOR THE COMPANY.<br><span>WHY HASN’T THE WORK CHANGED?</span></h1>
-            <p class="audience-note">For CEOs and business leaders already paying for AI across their teams.</p>
-            <p class="hero-lead">Because the company is AI-adapt, not yet AI-first.</p>
-            <p class="hero-body">AI-adapt asks “We have AI. Now what?” and the work keeps running the way it did before. AI-first asks “What has to change?” We work with your team to solve one AI problem in 7 calendar days. Choose training, measurement, or implementation. You pay only if you find the solution feasible and effective.</p>
+            <p class="audience-note">For CEOs and business leaders who bought AI for their teams.</p>
+            <p class="hero-lead">Because the company is <span class="nobr">AI-adapt</span>, not yet <span class="nobr">AI-first</span>.</p>
+            <p class="hero-body"><span class="nobr">AI-adapt</span> asks “We have AI. Now what?”, so the work runs the way it did before. <span class="nobr">AI-first</span> asks “What has to change in how we work, so AI pays off?”</p>
+            <p class="hero-body">We work with your team to solve one AI problem in <span class="nobr">7 calendar days</span>, whether it’s training, measurement, or implementation.</p>
+            <p class="hero-body"><strong>You pay only if it works.</strong></p>
             <div class="hero-actions">
-              <a class="button yellow" href="#contact">Talk to the AI ROI Taskforce <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+              <a class="button yellow" href="#contact">Talk to the <span class="nobr">AI ROI Taskforce</span> <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
               <a class="text-link" href="scorecard.html">Check workflow readiness <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
             </div>
           </div>
@@ -139,14 +145,14 @@
               <span>AI ROI TASKFORCE</span>
               <span>4 SPECIALISTS</span>
             </div>
-            <p class="system-intro">&ldquo;Prove measurable ROI on one workflow, then scale across the business.&rdquo;</p>
+            <p class="system-intro">&ldquo;We prove measurable ROI on one AI workflow, so you can scale it across the business.&rdquo;</p>
             <div class="system-result">
-              <h3>One senior squad, end to end.</h3>
+              <h3>4 specialists. 1 workflow. <span class="nobr">7 days</span>.</h3>
               <ul class="cohort-facts">
-                <li><strong>Discovery &amp; adoption</strong> — sit with staff and drive real daily use</li>
-                <li><strong>Business case &amp; ROI</strong> — measure baseline time, rework, and return</li>
-                <li><strong>Engineering</strong> — build and test inside your approved AI tools</li>
-                <li><strong>Delivery &amp; handover</strong> — transfer ownership and verify post-rollout use</li>
+                <li><strong>Discovery &amp; adoption</strong> — your staff use it daily</li>
+                <li><strong>Business case &amp; ROI</strong> — hours saved, in numbers</li>
+                <li><strong>Engineering</strong> — runs inside your <span class="nobr">approved AI tools</span></li>
+                <li><strong>Delivery &amp; handover</strong> — your team owns it after <span class="nobr">day 7</span></li>
               </ul>
             </div>
             <a class="text-link" href="scorecard.html">Take the 5-question readiness check <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
@@ -164,27 +170,18 @@
       </div>
     </section>
 
-    <div class="topics-band">
-      <div class="wrap">
-        <span>NO STRATEGY SLIDEWARE</span>
-        <span>YOUR APPROVED AI STACK</span>
-        <span>MEASURED OPERATIONAL ROI</span>
-        <span>OWNED BY YOUR TEAM</span>
-      </div>
-    </div>
-
     <section id="today-vs-after" tabindex="-1" aria-labelledby="state-heading">
       <div class="wrap">
         <h2 id="state-heading" class="shift">
-          <span class="shift-from"><small>WHERE YOU ARE</small><strong>AI-ADAPT</strong><em>“We have AI. Now what?”</em></span>
+          <span class="shift-from"><small>WHERE YOU ARE</small><strong><span class="nobr">AI-ADAPT</span></strong><em>“We have AI. Now what?”</em></span>
           <span class="shift-mid" aria-hidden="true">→</span>
-          <span class="shift-to"><small>WHERE YOU SHOULD BE</small><strong>AI-FIRST</strong><em>“We take full advantage of AI. What has to change?”</em></span>
+          <span class="shift-to"><small>WHERE YOU SHOULD BE</small><strong><span class="nobr">AI-FIRST</span></strong><em>“What has to change in how we work, so AI pays off?”</em></span>
         </h2>
-        <p class="shift-lead">Most companies are AI-adapt: the tools arrived, and the work stayed the same. The return comes when the company goes AI-first and changes how the work itself runs.</p>
-        <p class="example-label"><strong>ONE EXAMPLE OF THE SHIFT</strong> The weekly or monthly management meeting. The same shift applies to any recurring work in your company.</p>
+        <p class="shift-lead">The return comes when the work itself changes. Here’s what that looks like in one meeting.</p>
+        <p class="example-label"><strong>ONE EXAMPLE OF THE SHIFT</strong> Take your monthly <span class="nobr">management meeting</span>. The same shift works for any recurring work.</p>
         <div class="state-grid">
           <article class="state-card today">
-            <span class="state-tag">AI-ADAPT · THE MEETING TODAY</span>
+            <span class="state-tag"><span class="nobr">AI-ADAPT</span> · THE MEETING TODAY</span>
             <h3>Everyone has AI.<br>The meeting runs the old way.</h3>
             <svg viewBox="0 0 460 320" role="img" aria-label="Today: Sales, Operations and HR each prepare a report alone. Nothing is shared before the meeting, so the head hears every report for the first time and the hour goes to reporting.">
               <defs>
@@ -216,17 +213,17 @@
             <ul>
               <li>Each team prepares alone. No team sees what the others did, or where their work connects.</li>
               <li>The head walks in blind and hears every report for the first time.</li>
-              <li>Everyone expects sharp questions and direction on the spot. The hour goes to reporting.</li>
+              <li>Everyone expects the head to ask sharp questions and give direction on the spot, so the hour goes to reporting.</li>
             </ul>
           </article>
 
           <div class="state-arrow" aria-hidden="true">
             <svg viewBox="0 0 56 56"><circle cx="28" cy="28" r="26" fill="#ffcc00" stroke="#0b2046" stroke-width="3"/><path d="M16 28h22m-9-9 9 9-9 9" fill="none" stroke="#0b2046" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span>6 TOUCH<wbr>POINTS</span>
+            <span>7 DAYS</span>
           </div>
 
           <article class="state-card after">
-            <span class="state-tag">AI-FIRST · THE MEETING AS IT SHOULD RUN</span>
+            <span class="state-tag"><span class="nobr">AI-FIRST</span> · THE MEETING AS IT SHOULD RUN</span>
             <h3>The head reads first.<br>The meeting is for decisions.</h3>
             <svg viewBox="0 0 460 320" role="img" aria-label="Where you should be: each team's report goes into one shared source linked across teams. The head reviews it with AI and sends questions before the meeting. The meeting is for solving problems and deciding.">
               <defs>
@@ -259,7 +256,7 @@
               </g>
             </svg>
             <ul>
-              <li>Each team’s report lands in one shared source, connected to the other teams’ work.</li>
+              <li>Each team’s report lands in one <span class="nobr">shared source</span>, connected to the other teams’ work.</li>
               <li>The head reads it with AI before the meeting and sends questions and concerns ahead.</li>
               <li>The meeting is only for solving problems and making decisions.</li>
             </ul>
@@ -271,8 +268,8 @@
     <section id="how-we-work" class="own-setup" tabindex="-1" aria-labelledby="how-heading">
       <div class="wrap">
         <div class="section-heading">
-          <div><h2 id="how-heading">THE JOURNEY: 6 TOUCHPOINTS</h2></div>
-          <p>Each touchpoint shows what we need from you, what the taskforce does, and what you hold at the end of it. We start with one call before day 1, then spend 7 calendar days on the problem you choose.</p>
+          <div><h2 id="how-heading">7 DAYS, FROM PROBLEM TO PROOF</h2></div>
+          <p>One <span class="nobr">30-minute call</span>, then <span class="nobr">7 days</span> on the problem you choose.<br>Every step ends with something you own.</p>
         </div>
         <div class="journey-ends" aria-hidden="true">
           <span>START: AI PAID FOR, WORK UNCHANGED</span>
@@ -282,69 +279,67 @@
           <li class="pre">
             <span class="j-num">1</span>
             <span class="j-phase">BEFORE YOU COMMIT</span>
-            <h3>First conversation</h3>
-            <span class="j-time">30 minutes before day 1</span>
+            <h3>One problem, one <span class="nobr">success test</span>, one fee</h3>
+            <span class="j-time">30 minutes before <span class="nobr">day 1</span></span>
             <dl>
-              <dt>YOU</dt><dd>Tell us which AI tools you pay for and where the work has barely changed.</dd>
+              <dt>YOU GET</dt><dd class="get">One problem, an agreed <span class="nobr">success test</span>, and a fee based on the size of the problem.</dd>
+              <dt>YOU</dt><dd>Tell us which <span class="nobr">AI tools</span> you pay for and where the work has barely changed.</dd>
               <dt>THE TASKFORCE</dt><dd>Listens, asks about one recurring deliverable, and checks five readiness points.</dd>
-              <dt>YOU GET</dt><dd class="get">One problem, an agreed success test, and a fee based on the size of the problem.</dd>
             </dl>
             <div class="j-who"><span>Tim</span></div>
           </li>
           <li>
             <span class="j-num">2</span>
             <span class="j-phase">AUDIT · DAYS 1–2</span>
-            <h3>Real-run walkthrough</h3>
-            <span class="j-time">Observe one real run</span>
+            <h3>Your baseline, in numbers</h3>
             <dl>
+              <dt>YOU GET</dt><dd class="get">A description of the problem and baseline numbers for time, errors, or AI use.</dd>
               <dt>YOU</dt><dd>Lend us the person who runs the work and the person who reviews it.</dd>
               <dt>THE TASKFORCE</dt><dd>Follows last week’s real run end to end and marks where time and quality are lost.</dd>
-              <dt>YOU GET</dt><dd class="get">A description of the problem and baseline numbers for time, errors, or AI use.</dd>
             </dl>
             <div class="j-who"><span>Tim</span><span>Kyle</span></div>
           </li>
           <li>
             <span class="j-num">3</span>
             <span class="j-phase">OPTIMIZE · DAYS 3–4</span>
-            <h3>Design the solution</h3>
-            <span class="j-time">One workflow</span>
+            <h3>A one-page fix you approve</h3>
             <dl>
-              <dt>YOU</dt><dd>Show us what a good result looks like.</dd>
-              <dt>THE TASKFORCE</dt><dd>Cuts unnecessary steps and designs a solution around your success test.</dd>
               <dt>YOU GET</dt><dd class="get">A one-page proposal showing what changes and how to test it.</dd>
+              <dt>YOU</dt><dd>Show us what a good result looks like.</dd>
+              <dt>THE TASKFORCE</dt><dd>Cuts unnecessary steps and designs a solution around your <span class="nobr">success test</span>.</dd>
             </dl>
-            <div class="j-who"><span>Tinh</span><span>All four</span></div>
+            <div class="j-who"><span>All four</span></div>
           </li>
           <li>
             <span class="j-num">4</span>
             <span class="j-phase">AUTOMATE · DAYS 5–7</span>
-            <h3>Build and test in your workspace</h3>
+            <h3>A working setup, tested on your inputs</h3>
             <dl>
-              <dt>YOU</dt><dd>Your workflow owner tests it on real work. Your reviewer says what good looks like.</dd>
-              <dt>THE TASKFORCE</dt><dd>Builds inside your approved AI tools, using approved examples and data.</dd>
               <dt>YOU GET</dt><dd class="get">A working setup, tested on your own inputs.</dd>
+              <dt>YOU</dt><dd>Your workflow owner tests it on real work. Your reviewer says what good looks like.</dd>
+              <dt>THE TASKFORCE</dt><dd>Builds inside your <span class="nobr">approved AI tools</span>, using approved examples and data.</dd>
             </dl>
             <div class="j-who"><span>Kyle</span><span>Tim</span></div>
           </li>
           <li>
             <span class="j-num">5</span>
-            <span class="j-phase"></span>
-            <h3>Handover to a named owner</h3>
+            <span class="j-phase">HANDOVER · DAY 7</span>
+            <h3>A named owner who runs it</h3>
             <dl>
+              <dt>YOU GET</dt><dd class="get">A working solution, or a detailed implementation plan if rollout needs more time.</dd>
               <dt>YOU</dt><dd>Name the person who owns the workflow after we leave.</dd>
               <dt>THE TASKFORCE</dt><dd>Hands over the setup, the review checklist and a live walkthrough.</dd>
-              <dt>YOU GET</dt><dd class="get">A working solution, or a detailed implementation plan if rollout needs more time.</dd>
             </dl>
             <div class="j-who"><span>Long</span></div>
           </li>
           <li>
             <span class="j-num">6</span>
-            <span class="j-phase"></span>
-            <h3>Adoption check and the return</h3>
+            <span class="j-phase">REVIEW · AFTER DAY 7</span>
+            <h3>Before-and-after proof, in your numbers</h3>
             <dl>
-              <dt>YOU</dt><dd>Review the result and decide whether the solution is feasible and effective for your team.</dd>
-              <dt>THE TASKFORCE</dt><dd>Reviews the evidence with you against the baseline and the success test.</dd>
               <dt>YOU GET</dt><dd class="get">A before-and-after memo with your own numbers.</dd>
+              <dt>YOU</dt><dd>Review the result and decide whether it works for your team.</dd>
+              <dt>THE TASKFORCE</dt><dd>Reviews the evidence with you against the baseline and the <span class="nobr">success test</span>.</dd>
             </dl>
             <div class="j-who"><span>Tinh</span><span>Long</span></div>
           </li>
@@ -375,13 +370,13 @@
             <p class="offer-benefit">You pay only if you find the solution feasible and effective. Otherwise, you pay nothing.</p>
             <p class="offer-assurance">Common starting points span leadership reporting, client proposals, finance reconciliation, operations handoffs, and internal knowledge workflows—always with human review in the loop.</p>
             <div class="workflow-tags">
-              <span>Management reporting</span>
-              <span>Client proposals</span>
-              <span>Finance reconciliation</span>
-              <span>Ops handoffs</span>
+              <span><strong>Management reporting</strong>The head reads it before the meeting</span>
+              <span><strong>Client proposals</strong>A review-ready draft in hours, not days</span>
+              <span><strong>Finance reconciliation</strong>Month-end closes with fewer errors</span>
+              <span><strong>Ops handoffs</strong>Nothing gets dropped between teams</span>
             </div>
-            <a class="button yellow" style="margin-top:24px" href="#contact">Discuss your first workflow <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
-            <small>On the 30-minute call before day 1, we agree on a fee based on the size of the problem. In return, you agree to give a short testimonial or refer one person facing a similar problem. Nhà 88 issues a VAT invoice.</small>
+            <a class="button yellow" style="margin-top:24px" href="#contact">Contact us <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+            <small>On the <span class="nobr">30-minute call</span> before <span class="nobr">day 1</span>, we agree on a fee based on the size of the problem. In return, you agree to give a short testimonial or refer one person facing a similar problem. <span class="nobr">Nhà 88</span> issues a <span class="nobr">VAT invoice</span>.</small>
           </article>
         </div>
       </div>
@@ -391,7 +386,7 @@
       <div class="wrap">
         <div class="section-heading">
           <div><h2 id="team-heading">MEET THE TASKFORCE</h2></div>
-          <p>Four specialists covering discovery, business-case rigor, production engineering, and project handover.</p>
+          <p>Four specialists covering discovery, <span class="nobr">business-case rigor</span>, <span class="nobr">production engineering</span>, and <span class="nobr">project handover</span>.</p>
         </div>
         <div class="offer-grid team-grid">
           <article class="offer-card">
@@ -426,9 +421,9 @@
       <div class="wrap">
         <h2 id="contact-heading">WHERE DID YOU EXPECT<br><span>AI TO PAY OFF?</span></h2>
         <div class="contact-bottom">
-          <p>Tell us which AI tools your company already pays for and where speed or quality has barely changed. In a 30-minute call before day 1, we choose one problem and agree on what success looks like, the time your team can give, and the fee.</p>
+          <p>Tell us which <span class="nobr">AI tools</span> your company already pays for and where speed or quality has barely changed. In a <span class="nobr">30-minute call</span> before <span class="nobr">day 1</span>, we choose one problem and agree on what success looks like, the time your team can give, and the fee.</p>
           <div>
-            <a class="button yellow" href="mailto:timqtran1008@gmail.com?subject=AI%20ROI%20Taskforce&amp;body=Company%20and%20role%3A%0AAI%20tools%20we%20already%20pay%20for%3A%0AWhere%20speed%20or%20quality%20has%20barely%20changed%3A%0AWorkflows%20we%20want%20to%20improve%20first%3A%0A">Email the AI ROI Taskforce <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+            <a class="button yellow" href="mailto:timqtran1008@gmail.com?subject=AI%20ROI%20Taskforce&amp;body=Company%20and%20role%3A%0AAI%20tools%20we%20already%20pay%20for%3A%0AWhere%20speed%20or%20quality%20has%20barely%20changed%3A%0AWorkflows%20we%20want%20to%20improve%20first%3A%0A">Email the <span class="nobr">AI ROI Taskforce</span> <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
             <a class="email-link" href="mailto:timqtran1008@gmail.com?subject=AI%20ROI%20Taskforce&amp;body=Company%20and%20role%3A%0AAI%20tools%20we%20already%20pay%20for%3A%0AWhere%20speed%20or%20quality%20has%20barely%20changed%3A%0AWorkflows%20we%20want%20to%20improve%20first%3A%0A">timqtran1008@gmail.com</a>
             <a class="email-link" href="https://zalo.me/0913922150" target="_blank" rel="noopener noreferrer">Zalo: 0913 922 150</a>
             <p class="contact-help">Your email opens with four short questions filled in. If no mail app opens, copy the address or message us on Zalo.</p>
@@ -443,7 +438,7 @@
       <a class="brand" href="./">ai roi taskforce<span>.</span></a>
       <p>Turn company AI spend into measurable operational return.</p>
       <a href="scorecard.html">Readiness scorecard</a>
-      <a href="../personal/">Here for yourself? Personal AI setup</a>
+      <a href="../personal/">Here for yourself? <span class="nobr">Personal AI setup</span></a>
       <a href="https://www.linkedin.com/in/timqtran" target="_blank" rel="noopener noreferrer">LinkedIn <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
       <a href="#main">Back to top <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V4m-6 6 6-6 6 6"/></svg></a>
     </div>
