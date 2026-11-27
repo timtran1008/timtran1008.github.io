@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiz Game</title>
+<style>
+:root{--yellow:#fdc65b;--blue1:#5aa6ff;--blue2:#2f6fe0;--red:#ff6b6b;--green:#25c26e;--pink:#ec4899;--ink:#3b3b3b;--paper:#f4f2ee}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:'Bree Serif',Georgia,serif;color:var(--ink);background:var(--paper);overflow:hidden}
+button{font-family:inherit;cursor:pointer;border:0}
+.hidden{display:none!important}
+.fun{font-family:Fredoka,'Arial Rounded MT Bold',sans-serif;font-weight:700}
+
+/* ---------- setup ---------- */
+#setup{height:100%;overflow:auto;padding:20px 16px 60px;background:var(--yellow)}
+#setup h1{text-align:center;font-size:44px;margin:6px 0 2px;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.18)}
+#setup .sub{text-align:center;margin-bottom:18px;color:#6b4b00}
+.card{background:#fff;border-radius:14px;box-shadow:0 3px 10px rgba(0,0,0,.12);padding:16px 20px;max-width:960px;margin:0 auto 14px}
+.card h2{margin:0 0 10px;font-size:22px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{min-width:46px;padding:8px 14px;border-radius:12px;background:#eee;font-size:18px;color:#999}
+.pill.on{background:#fff;color:var(--blue2);box-shadow:0 0 0 3px var(--yellow)}
+.names{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-top:12px}
+.names input{font:inherit;padding:8px 10px;border:2px solid #eee;border-radius:10px}
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
+.tog{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:12px;background:#fafafa}
+.tog .ic{font-size:30px;width:40px;text-align:center}
+.tog .tx{flex:1}
+.tog .tx b{display:block;font-size:17px}
+.tog .tx small{color:#999}
+.sw{width:54px;height:30px;border-radius:30px;background:#ccc;position:relative;flex:none}
+.sw::after{content:'';position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.15s}
+.sw.on{background:var(--yellow)}
+.sw.on::after{left:28px}
+.tog input[type=number]{width:60px;font:inherit;padding:4px;border:2px solid #eee;border-radius:8px}
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#startBtn{display:block;margin:10px auto;padding:14px 50px;font-size:28px;border-radius:40px;background:var(--pink);color:#fff;box-shadow:0 5px 0 #b8306f}
+#startBtn:active{transform:translateY(3px);box-shadow:0 2px 0 #b8306f}
+
+/* ---------- board ---------- */
+#game{height:100%;display:flex;flex-direction:column}
+#bar{background:var(--yellow);display:flex;align-items:center;justify-content:space-around;padding:6px 60px 6px 10px;position:relative;flex:none}
+.team{text-align:center;padding:2px 14px;border-radius:8px;transition:.2s}
+.team .nm{font-size:clamp(16px,2.6vw,30px);padding:0 10px;border-radius:6px}
+.team.active .nm{background:var(--red);color:#fff}
+.team .sc{font-size:clamp(18px,2.8vw,32px)}
+.team .sc.bump{animation:bump .6s}
+.team .adj{display:none;gap:4px;justify-content:center}
+.editing .team .adj{display:flex}
+.adj button{background:#fff;border-radius:6px;padding:0 8px;font-size:16px}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.6);color:#fff}100%{transform:scale(1)}}
+#tools{position:absolute;right:8px;top:6px;display:flex;flex-direction:column;gap:5px}
+#tools button{width:28px;height:28px;border-radius:50%;background:#f0a830;color:#fff;font-size:14px}
+#board{flex:1;display:grid;gap:10px;padding:10px}
+.tile{border-radius:14px;color:#fff;font-size:clamp(22px,5vw,64px);display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(var(--blue1),var(--blue2));box-shadow:0 4px 0 rgba(0,0,0,.15);transition:transform .12s;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+.tile:nth-child(odd){background:linear-gradient(#6db3ff,#4b8ff0)}
+.tile:hover{transform:scale(1.04)}
+.tile.used{background:transparent!important;box-shadow:none;color:#ddd;text-shadow:none;cursor:default;transform:none}
+.tile.p5{background:linear-gradient(#7fd98a,#3fb555)!important}
+.tile.p10{background:linear-gradient(#6db3ff,#2f6fe0)!important}
+.tile.p15{background:linear-gradient(#c79bff,#8b5cf6)!important}
+.tile.p20{background:linear-gradient(#ffb36b,#f97316)!important}
+.tile.p25{background:linear-gradient(#ff8fa3,#e11d48)!important}
+.tile.used.p5,.tile.used.p10,.tile.used.p15,.tile.used.p20,.tile.used.p25{background:transparent!important}
+
+/* ---------- modal ---------- */
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4vh 4vw}
+#box{width:min(1100px,94vw);background:#fff;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,.3);overflow:hidden;animation:pop .25s}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+#mhead{height:44px;display:flex;align-items:center;justify-content:center;color:var(--yellow);font-size:26px;position:relative;background:var(--blue2)}
+#mhead.pu{background:var(--green)}
+#mhead.bad{background:var(--red)}
+#timerbar{position:absolute;left:0;bottom:0;height:6px;background:var(--yellow);width:100%}
+#who{position:absolute;left:12px;color:#fff;font-size:16px}
+#mclose{position:absolute;right:12px;background:none;color:#fff;font-size:22px}
+#mbody{padding:20px;text-align:center;max-height:62vh;overflow:auto}
+#mimg{max-height:34vh;max-width:100%;border-radius:10px;transition:filter .1s}
+#mimgtxt{font-size:min(18vh,140px);line-height:1.1}
+#blurRow{margin-top:6px}
+#qtext{font-size:clamp(24px,4.4vw,52px);margin:10px 0 0;white-space:pre-wrap}
+#atext{font-size:clamp(22px,3.6vw,42px);color:var(--green);margin-top:12px}
+#choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;width:min(1100px,94vw);margin-top:14px}
+.ch{background:#fff;border-radius:6px;padding:16px;font-size:clamp(20px,3.4vw,40px);color:#1b8fb4;box-shadow:0 3px 8px rgba(0,0,0,.15);text-align:center}
+.ch.sel{outline:4px solid var(--yellow)}
+.ch.right{background:var(--green);color:#fff}
+.ch.wrong{background:var(--red);color:#fff}
+.ch.dim{color:#c3dde6;box-shadow:none}
+#pubig{font-size:min(26vh,190px);line-height:1.15;display:inline-block;animation:wob 1s ease-in-out infinite alternate}
+@keyframes wob{from{transform:rotate(-8deg) scale(1)}to{transform:rotate(8deg) scale(1.08)}}
+#pucard{background:#fff;border-radius:6px;padding:12px;margin-top:14px;width:min(1100px,94vw);text-align:center;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+#putitle{font-size:clamp(26px,4vw,46px);color:#1b8fb4}
+#puresult{font-size:clamp(18px,2.4vw,28px);color:#777;margin-top:4px}
+#btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.btn{padding:8px 22px;border-radius:20px;font-size:20px;color:#fff;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.b-show{background:var(--pink)}.b-check{background:#555}.b-ok{background:var(--green)}.b-oops{background:var(--red)}.b-pass{background:#f0a830}.b-team{background:var(--blue2)}
+#timesup{color:var(--red);font-size:28px;margin-top:6px}
+
+/* ---------- game over ---------- */
+#over{position:fixed;inset:0;background:var(--yellow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#over h1{font-size:clamp(40px,8vw,96px);color:#fff;margin:0;text-shadow:0 4px 0 rgba(0,0,0,.18)}
+#trophy{font-size:min(22vh,160px);animation:wob 1s infinite alternate}
+#rank{font-size:clamp(20px,3vw,32px);margin:10px 0 20px}
+#rank div{margin:4px 0}
+#confetti{position:fixed;inset:0;pointer-events:none}
+/* Deck Recall */
+:root{--yellow:#ffcc00;--ink:#0b2046;--blue2:#173967;--paper:#f7f7f2}
+body,.fun{font-family:system-ui,sans-serif}
+#setup{background:var(--ink)}
+#setup h1{color:var(--yellow);text-shadow:none;font-size:clamp(32px,5vw,52px)}
+#setup .sub{color:white}
+.card{border-radius:4px;box-shadow:none;border-left:5px solid var(--yellow)}
+#startBtn,#startBtn:active{background:var(--yellow);color:var(--ink);border-radius:4px;box-shadow:none}
+.pill,.tog,.tile{border-radius:4px}
+.pill,.tog .tx small{color:#49596f}
+.tile,.tile:nth-child(odd){background:#132e52;border-bottom:5px solid var(--yellow);box-shadow:none;text-shadow:none}
+.tile.p5{background:#174f48!important}.tile.p10{background:#173967!important}.tile.p15{background:#52335d!important}.tile.p20{background:#834524!important}.tile.p25{background:#7b3143!important}
+.tile.used{border:0}
+@media(max-width:600px){.toggles{grid-template-columns:minmax(0,1fr)}#choices{max-height:32vh;overflow:auto}#mbody{max-height:40vh}}
+</style>
+</head>
+<body>
+
+<!-- ============ SETUP ============ -->
+<div id="setup">
+  <h1 class="fun" id="title">Quiz Game</h1>
+  <div class="sub" id="subtitle"></div>
+  <section class="card" aria-labelledby="how-to-play">
+    <h2 id="how-to-play">How to play</h2>
+    <ul>
+      <li>Choose how many teams are playing, then press <strong>Play</strong>.</li>
+      <li>On your turn, pick a tile. Read the question out loud.</li>
+      <li>Tap an answer or say your answer out loud. Press <strong>Check</strong>.</li>
+      <li>If you answered out loud, press <strong>Okay</strong> for right or <strong>Oops</strong> for wrong. Then let the next team pick.</li>
+      <li>Some tiles give a bonus or take points away. Follow the message on the tile.</li>
+    </ul>
+  </section>
+
+  <div class="card">
+    <h2>👥 Teams</h2>
+    <div class="pills" id="teamPills"></div>
+    <div class="names" id="teamNames"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔲 Grid size</h2>
+    <div class="pills" id="gridPills"></div>
+    <div style="margin-top:8px;color:#999" id="gridNote"></div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <h2>✨ Power-ups</h2>
+      <div style="color:#999">About 1 tile in 5 is a power-up; the rest are questions worth 5–25 points.</div>
+    </div>
+    <div class="toggles" id="puToggles"></div>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ Rules</h2>
+    <div class="toggles" id="ruleToggles"></div>
+  </div>
+
+  <button id="startBtn" class="fun">Play ▶</button>
+</div>
+
+<!-- ============ GAME ============ -->
+<div id="game" class="hidden">
+  <div id="bar">
+    <div id="teams" style="display:contents"></div>
+    <div id="tools">
+      <button id="tEnd" title="End game">✖</button>
+      <button id="tEdit" title="Edit scores">✎</button>
+      <button id="tSound" title="Sound">🔊</button>
+    </div>
+  </div>
+  <div id="board"></div>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div id="modal" class="hidden">
+  <div id="box">
+    <div id="mhead"><span id="who"></span><span id="mpts" class="fun"></span><button id="mclose" title="Close">✕</button><div id="timerbar"></div></div>
+    <div id="mbody">
+      <div id="qwrap">
+        <img id="mimg" class="hidden" alt="">
+        <div id="mimgtxt" class="hidden"></div>
+        <div id="blurRow" class="hidden">Reveal: <input type="range" id="blurSlider" min="0" max="20" value="20"></div>
+        <div id="qtext"></div>
+        <div id="atext" class="hidden"></div>
+        <div id="timesup" class="hidden fun">⏰ Time's up!</div>
+      </div>
+      <div id="puwrap" class="hidden"><span id="pubig"></span></div>
+    </div>
+  </div>
+  <div id="choices" class="hidden"></div>
+  <div id="pucard" class="hidden"><div id="putitle" class="fun"></div><div id="puresult"></div></div>
+  <div id="btns"></div>
+</div>
+
+<!-- ============ GAME OVER ============ -->
+<div id="over" class="hidden">
+  <div id="trophy">🏆</div>
+  <h1 class="fun" id="winner"></h1>
+  <div id="rank"></div>
+  <div class="row" style="justify-content:center">
+    <button class="btn b-team" id="oBoard">Back to board</button>
+    <button class="btn b-ok" id="oAgain">Play again</button>
+    <button class="btn b-show" id="oSetup">Change settings</button>
+  </div>
+</div>
+<canvas id="confetti" class="hidden"></canvas>
+
+<script>
+/* ---- game data: build-game.py replaces everything between the two markers ---- */
+const GAME = /*GAME_DATA*/{
+  "title": "Animal Recall",
+  "subtitle": "Deck Recall - Articles and animal trivia",
+  "questions": [
+    {
+      "q": "cat: a, an or none?",
+      "a": "a",
+      "img": "🐱"
+    },
+    {
+      "q": "elephant: a, an or none?",
+      "a": "an",
+      "img": "🐘"
+    },
+    {
+      "q": "dogs: a, an or none?",
+      "a": "none",
+      "img": "🐶"
+    },
+    {
+      "q": "owl: a, an or none?",
+      "a": "an",
+      "img": "🦉"
+    },
+    {
+      "q": "bees: a, an or none?",
+      "a": "none",
+      "img": "🐝"
+    },
+    {
+      "q": "umbrella: a, an or none?",
+      "a": "an",
+      "img": "☂️"
+    },
+    {
+      "q": "How many hearts does an octopus have?",
+      "a": "3",
+      "wrong": [
+        "1",
+        "2",
+        "8"
+      ],
+      "img": "🐙"
+    },
+    {
+      "q": "What shape is wombat poop?",
+      "a": "A cube",
+      "wrong": [
+        "A star",
+        "A spiral",
+        "A triangle"
+      ]
+    },
+    {
+      "q": "What is a group of flamingos called?",
+      "a": "A flamboyance",
+      "wrong": [
+        "A blush",
+        "A tutu",
+        "A pinkie"
+      ],
+      "img": "🦩"
+    },
+    {
+      "q": "Which is the fastest land animal?",
+      "a": "Cheetah",
+      "wrong": [
+        "Lion",
+        "Horse",
+        "Greyhound"
+      ],
+      "img": "🐆"
+    },
+    {
+      "q": "Name 3 animals that can fly.",
+      "a": "Any 3 (teacher decides)"
+    },
+    {
+      "q": "Spell \"elephant\" backwards.",
+      "a": "tnahpele"
+    }
+  ]
+}/*END_GAME_DATA*/;
+
+/* ---- power-ups ---- */
+const PU = {
+  gold:     {e:'💰', n:'Gold',      d:'Win 50 points!',            good:1},
+  boom:     {e:'💥', n:'Boom',      d:'Lose 50 points!'},
+  star:     {e:'⭐', n:'Star',      d:'Double points!',            good:1},
+  rocket:   {e:'🚀', n:'Rocket',    d:'Go to first place!',        good:1, multi:1},
+  banana:   {e:'🍌', n:'Banana',    d:'Go to last place!',         multi:1},
+  eraser:   {e:'🧽', n:'Eraser',    d:'Reset your score!'},
+  virus:    {e:'🦠', n:'Virus',     d:'Reset ALL scores!'},
+  trap:     {e:'🪤', n:'Trap',      d:'No points!'},
+  seesaw:   {e:'⚖️', n:'Seesaw',    d:'Swap points with a team you choose!',              multi:1, tgt:1},
+  magnet:   {e:'🧲', n:'Magnet',    d:'Roll the dice: take points from a team!',         good:1, multi:1, tgt:1},
+  lifesaver:{e:'🛟', n:'Lifesaver', d:'Roll the dice: give points to a team!', multi:1, tgt:1},
+  heart:    {e:'💖', n:'Heart',     d:'Roll the dice: a team you choose wins points!', multi:1, tgt:1},
+  shark:    {e:'🦈', n:'Shark',     d:'Roll the dice: a team you choose loses points!', good:1, multi:1, tgt:1},
+};
+
+const RULES = [
+  ['timer',     '⏱️', 'Timer',            'Seconds per question (0 = off)', 'num'],
+  ['pass',      '➡️', 'Pass button',      'Pass the question to the next team'],
+  ['anyone',    '🙋', 'Anyone can answer','Choose which team wins the points'],
+  ['partial',   '🌗', 'Partial credit',   'Choose how many points to give'],
+  ['losePts',   '❌', 'Lose points',      'Wrong answers lose points'],
+  ['resetWrong','😵', 'Reset score',      'Wrong answers reset score'],
+  ['colorful',  '🎨', 'Colorful grid',    'Colour shows each tile\'s points'],
+  ['emoji',     '😀', 'Emoji grid',       'Emojis instead of numbers'],
+  ['blur',      '💧', 'Blur images',      'Slide to reveal images'],
+  ['noShuffle', '🔢', 'No shuffle',       'Questions appear in bank order'],
+  ['hideScore', '👻', 'Hide score',       'Play without keeping score'],
+  ['sound',     '🔊', 'Sound',            'Sound effects'],
+];
+
+const EMOJIS = '🍎🍌🍇🍉🍓🍒🥝🍍🥕🌽🍄🌵🌻🌈⭐🌙☀️⚡🔥❄️🎈🎁🎀⚽🏀🎲🎯🎸🚗🚀🛸🚲⛵🐶🐱🐼🐨🐯🦁🐸🐵🐧🐢🐙🦋🐝🦄🐳'.match(/\p{Extended_Pictographic}️?/gu);
+
+/* ---- settings ---- */
+const S = {teams:2, names:[], grid:16, pu:{}, timer:0, pass:false, anyone:false, partial:false,
+  losePts:false, resetWrong:false, colorful:false, emoji:false, blur:false, noShuffle:false, hideScore:false, sound:true};
+Object.keys(PU).forEach(k => S.pu[k] = true);
+try { const saved = JSON.parse(localStorage.getItem('quizgame-settings') || '{}'); delete saved.puShare; delete saved.pct; Object.assign(S, saved); } catch(e) {}
+
+const $ = id => document.getElementById(id);
+const el = (tag, cls, html) => { const x = document.createElement(tag); if (cls) x.className = cls; if (html != null) x.innerHTML = html; return x; };
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const rnd5 = () => 5 * (1 + Math.floor(Math.random() * 5));          // 5..25
+const PU_SHARE = 0.2;   // ~80/20 questions to power-ups: the game stays a revision game
+
+/* ---- sound (WebAudio, no files) ---- */
+let AC;
+function tone(f, d, type = 'triangle', when = 0, vol = .12) {
+  if (!S.sound) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    const o = AC.createOscillator(), g = AC.createGain(), t = AC.currentTime + when;
+    o.type = type; o.frequency.value = f;
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + d);
+    o.connect(g).connect(AC.destination); o.start(t); o.stop(t + d + .05);
+  } catch (e) {}
+}
+const SFX = {
+  pick: () => tone(660, .1),
+  good: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .18, 'triangle', i * .08)),
+  bad:  () => [200, 150].forEach((f, i) => tone(f, .3, 'sawtooth', i * .2, .07)),
+  pu:   () => [400, 600, 800, 1000, 1300].forEach((f, i) => tone(f, .1, 'square', i * .05, .05)),
+  tick: () => tone(1200, .05, 'square', 0, .04),
+  win:  () => [523, 659, 784, 1047, 784, 1047, 1319].forEach((f, i) => tone(f, .25, 'triangle', i * .13)),
+};
+
+/* ================= SETUP SCREEN ================= */
+function maxQuestions() { return GAME.questions.length; }
+function gridOptions() { return [8, 16, 24, 36, 48]; }
+// questions first, then power-ups as ~20% of the board actually built (a short bank shrinks both)
+function boardPlan(grid) {
+  const on = Object.keys(PU).filter(k => S.pu[k] && (S.teams > 1 || !PU[k].multi));
+  if (S.hideScore || !on.length) return {nQ: Math.min(grid, maxQuestions()), nPU: 0};
+  const nQ = Math.min(grid - Math.round(grid * PU_SHARE), maxQuestions());
+  return {nQ, nPU: Math.round(nQ * PU_SHARE / (1 - PU_SHARE))};
+}
+
+function renderSetup() {
+  $('title').textContent = GAME.title || 'Quiz Game';
+  document.title = GAME.title || 'Quiz Game';
+  $('subtitle').textContent = (GAME.subtitle ? GAME.subtitle + ' · ' : '') + GAME.questions.length + ' questions';
+
+  const tp = $('teamPills'); tp.innerHTML = '';
+  for (let n = 1; n <= 8; n++) {
+    const b = el('button', 'pill fun' + (S.teams === n ? ' on' : ''), n);
+    b.onclick = () => { S.teams = n; renderSetup(); };
+    tp.appendChild(b);
+  }
+  const tn = $('teamNames'); tn.innerHTML = '';
+  for (let i = 0; i < S.teams; i++) {
+    const inp = el('input'); inp.value = S.names[i] || ('Team ' + (i + 1));
+    inp.oninput = () => S.names[i] = inp.value;
+    tn.appendChild(inp);
+  }
+
+  const gp = $('gridPills'); gp.innerHTML = '';
+  gridOptions().forEach(g => {
+    const b = el('button', 'pill fun' + (S.grid === g ? ' on' : ''), g);
+    b.onclick = () => { S.grid = g; renderSetup(); };
+    gp.appendChild(b);
+  });
+  const {nQ, nPU} = boardPlan(S.grid);
+  $('gridNote').textContent = `${nQ} question tiles + ${nPU} power-up tiles` +
+    (nQ + nPU < S.grid ? ` (bank only has ${maxQuestions()} questions, so the board is smaller)` : '');
+
+
+  const pt = $('puToggles'); pt.innerHTML = '';
+  Object.entries(PU).forEach(([k, p]) => {
+    const t = el('div', 'tog', `<span class="ic">${p.e}</span><span class="tx"><b>${p.n}</b><small>${p.d}${p.multi ? ' · 2+ teams' : ''}</small></span><span class="sw${S.pu[k] ? ' on' : ''}"></span>`);
+    t.onclick = () => { S.pu[k] = !S.pu[k]; renderSetup(); };
+    pt.appendChild(t);
+  });
+
+  const rt = $('ruleToggles'); rt.innerHTML = '';
+  RULES.forEach(([k, ic, n, d, kind]) => {
+    if (kind === 'num') {
+      const t = el('div', 'tog', `<span class="ic">${ic}</span><span class="tx"><b>${n}</b><small>${d}</small></span>`);
+      const inp = el('input'); inp.type = 'number'; inp.min = 0; inp.step = 5; inp.value = S[k];
+      inp.oninput = () => S[k] = Math.max(0, +inp.value || 0);
+      t.appendChild(inp); rt.appendChild(t);
+    } else {
+      const t = el('div', 'tog', `<span class="ic">${ic}</span><span class="tx"><b>${n}</b><small>${d}</small></span><span class="sw${S[k] ? ' on' : ''}"></span>`);
+      t.onclick = () => { S[k] = !S[k]; renderSetup(); };
+      rt.appendChild(t);
+    }
+  });
+}
+
+/* ================= GAME STATE ================= */
+let G;   // {teams:[{name,score}], turn, tiles:[], open}
+
+function newGame() {
+  try { localStorage.setItem('quizgame-settings', JSON.stringify(S)); } catch { /* Offline settings are optional. */ }
+  const teams = [];
+  for (let i = 0; i < S.teams; i++) teams.push({name: (S.names[i] || 'Team ' + (i + 1)).trim() || 'Team ' + (i + 1), score: 0});
+
+  const puKeys = Object.keys(PU).filter(k => S.pu[k] && (S.teams > 1 || !PU[k].multi));
+  const {nQ, nPU} = boardPlan(S.grid);
+  const qs = (S.noShuffle ? GAME.questions.slice() : shuffle(GAME.questions)).slice(0, nQ);
+  const size = qs.length + nPU;
+
+  // power-ups: cycle through a shuffled list so the same one rarely repeats
+  let bag = [], pus = [];
+  for (let i = 0; i < nPU; i++) { if (!bag.length) bag = shuffle(puKeys); pus.push(bag.pop()); }
+  const puSlots = new Set(shuffle([...Array(size).keys()]).slice(0, nPU));
+
+  const tiles = []; let qi = 0, pi = 0;
+  const emo = shuffle(EMOJIS);
+  for (let i = 0; i < size; i++) {
+    const label = S.emoji ? emo[i % emo.length] : String(i + 1);
+    if (puSlots.has(i)) tiles.push({type: 'pu', key: pus[pi++], label});
+    else {
+      const q = qs[qi++];
+      const pts = rnd5();   // every question tile: 5, 10, 15, 20 or 25
+      tiles.push({type: 'q', q, pts, label});
+    }
+  }
+  G = {teams, turn: 0, tiles, used: 0};
+  $('setup').classList.add('hidden'); $('over').classList.add('hidden');
+  $('game').classList.remove('hidden');
+  renderBoard(); renderTeams();
+}
+
+function renderTeams(bumpIdx = []) {
+  const box = $('teams'); box.innerHTML = '';
+  G.teams.forEach((t, i) => {
+    const d = el('div', 'team fun' + (i === G.turn && G.teams.length > 1 ? ' active' : ''));
+    d.appendChild(el('div', 'nm', esc(t.name)));
+    if (!S.hideScore) {
+      const sc = el('div', 'sc' + (bumpIdx.includes(i) ? ' bump' : ''), t.score);
+      d.appendChild(sc);
+      const adj = el('div', 'adj');
+      [-5, 5].forEach(v => { const b = el('button', '', v > 0 ? '+5' : '−5'); b.onclick = () => { t.score += v; renderTeams([i]); }; adj.appendChild(b); });
+      d.appendChild(adj);
+    }
+    d.querySelector('.nm').onclick = () => { if ($('game').classList.contains('editing')) { G.turn = i; renderTeams(); } };
+    box.appendChild(d);
+  });
+}
+
+function renderBoard() {
+  const b = $('board'); b.innerHTML = '';
+  const n = G.tiles.length;
+  const cols = n <= 8 ? 4 : n <= 16 ? 4 : n <= 24 ? 6 : n <= 36 ? 6 : 8;
+  b.style.gridTemplateColumns = `repeat(${cols},1fr)`;
+  b.style.gridTemplateRows = `repeat(${Math.ceil(n / cols)},1fr)`;
+  G.tiles.forEach((t, i) => {
+    let cls = 'tile fun' + (t.used ? ' used' : '');
+    if (S.colorful && t.type === 'q') cls += ' p' + t.pts;
+    if (S.colorful && t.type === 'pu') cls += ' p' + [5, 10, 15, 20, 25][i % 5];  // disguise power-ups
+    const d = el('button', cls, esc(t.label));
+    d.onclick = () => { if (!t.used) openTile(i); };
+    b.appendChild(d);
+  });
+}
+
+function nextTurn() { G.turn = (G.turn + 1) % G.teams.length; }
+
+/* ================= MODAL ================= */
+let timerId = null, answering = 0;
+function stopTimer() { if (timerId) clearInterval(timerId); timerId = null; }
+function btns(list) {
+  const b = $('btns'); b.innerHTML = '';
+  list.forEach(([txt, cls, fn]) => { const x = el('button', 'btn ' + cls, txt); x.onclick = fn; b.appendChild(x); });
+}
+function showModal(isPU) {
+  $('modal').classList.remove('hidden');
+  $('qwrap').classList.toggle('hidden', isPU); $('puwrap').classList.toggle('hidden', !isPU);
+  $('pucard').classList.toggle('hidden', !isPU); $('choices').classList.add('hidden');
+  $('atext').classList.add('hidden'); $('timesup').classList.add('hidden');
+  $('timerbar').style.width = '0';
+  const box = $('box'); box.style.animation = 'none'; box.offsetHeight; box.style.animation = '';
+}
+function closeModal() {
+  stopTimer(); $('modal').classList.add('hidden');
+  renderBoard(); renderTeams();
+  if (G.tiles.every(t => t.used)) setTimeout(gameOver, 400);
+}
+function setWho() { $('who').textContent = G.teams.length > 1 ? G.teams[answering].name : ''; }
+function finishTurn() { nextTurn(); closeModal(); }
+
+function openTile(i) {
+  const t = G.tiles[i]; t.used = true; G.used++;
+  answering = G.turn;
+  t.type === 'pu' ? openPU(t) : openQ(t);
+}
+
+/* ---- question ---- */
+function openQ(t) {
+  SFX.pick(); showModal(false);
+  const q = t.q;
+  $('mhead').className = ''; $('mpts').textContent = S.hideScore ? '' : t.pts; setWho();
+  const img = q.img || '', isPic = /^(https?:|data:|\.|\/)/.test(img) || /\.(png|jpe?g|gif|webp|svg)$/i.test(img);
+  $('mimg').classList.toggle('hidden', !isPic); $('mimgtxt').classList.toggle('hidden', !img || isPic);
+  if (isPic) $('mimg').src = img; else $('mimgtxt').textContent = img;
+  const blurOn = S.blur && img;
+  $('blurRow').classList.toggle('hidden', !blurOn);
+  const setBlur = v => { $('mimg').style.filter = $('mimgtxt').style.filter = v > 0 ? `blur(${v}px)` : 'none'; };
+  $('blurSlider').value = blurOn ? 20 : 0; setBlur(blurOn ? 20 : 0);
+  $('blurSlider').oninput = e => setBlur(+e.target.value);
+  $('qtext').textContent = q.q;
+  $('atext').textContent = q.a;
+
+  // 4 choices when the bank gives 3+ wrong answers; otherwise the team answers on the spot
+  const opts = q.wrong && q.wrong.length >= 3 ? shuffle([q.a, ...shuffle(q.wrong).slice(0, 3)]) : null;
+  const ch = $('choices'); ch.innerHTML = '';
+  let picked = null;
+  if (opts) opts.forEach(o => {
+    const c = el('button', 'ch', esc(o)); c.dataset.v = o;
+    c.onclick = () => { if (ch.dataset.done) return; ch.querySelectorAll('.ch').forEach(x => x.classList.remove('sel')); c.classList.add('sel'); picked = o; SFX.pick(); };
+    ch.appendChild(c);
+  });
+  delete ch.dataset.done;
+  ch.classList.toggle('hidden', !opts);
+
+  // timer
+  stopTimer();
+  if (S.timer > 0) {
+    const end = Date.now() + S.timer * 1000; let lastSec = S.timer;
+    $('timerbar').style.width = '100%';
+    timerId = setInterval(() => {
+      const left = end - Date.now();
+      $('timerbar').style.width = Math.max(0, left / (S.timer * 10)) + '%';
+      const sec = Math.ceil(left / 1000);
+      if (sec < lastSec && sec <= 3 && sec > 0) SFX.tick(); lastSec = sec;
+      if (left <= 0) { stopTimer(); $('timesup').classList.remove('hidden'); SFX.bad(); }
+    }, 100);
+  }
+
+  const check = () => {
+    stopTimer();
+    if (opts) {
+      ch.classList.remove('hidden'); ch.dataset.done = 1;
+      ch.querySelectorAll('.ch').forEach(c => {
+        if (c.dataset.v === q.a) c.classList.add('right');
+        else if (c.dataset.v === picked) c.classList.add('wrong');
+        else c.classList.add('dim');
+      });
+      picked === q.a ? SFX.good() : picked != null ? SFX.bad() : null;
+    } else { $('atext').classList.remove('hidden'); }
+    // a picked choice settles itself: score now, then one Next button
+    if (opts && picked != null) {
+      const ok = picked === q.a, tm = G.teams[answering]; let changed = [];
+      if (!S.hideScore) {
+        if (ok) { tm.score += t.pts; changed = [answering]; }
+        else if (S.resetWrong) { tm.score = 0; changed = [answering]; }
+        else if (S.losePts) { tm.score -= t.pts; changed = [answering]; }
+      }
+      renderTeams(changed);
+      return btns([['Next ▶', 'b-ok', () => finishTurnWithBump([])]]);
+    }
+    judge();   // nothing picked (answered aloud) or on-the-spot: the teacher rules
+  };
+  const judge = () => btns([['✔ Okay', 'b-ok', () => correct(t)], ['✖ Oops', 'b-oops', () => wrong(t)]]);
+  const pass = () => { answering = (answering + 1) % G.teams.length; setWho(); };
+
+  const l = [['Check', 'b-check', check]];
+  if (S.pass && G.teams.length > 1) l.push(['➡ Pass', 'b-pass', pass]);
+  btns(l);
+  $('mclose').onclick = () => finishTurn();
+}
+
+function award(teamIdx, pts) {
+  if (!S.hideScore) { G.teams[teamIdx].score += pts; }
+  SFX.good(); finishTurnWithBump([teamIdx]);
+}
+function finishTurnWithBump(idx) { nextTurn(); stopTimer(); $('modal').classList.add('hidden'); renderBoard(); renderTeams(idx); if (G.tiles.every(t => t.used)) setTimeout(gameOver, 600); }
+
+function correct(t) {
+  const pickPoints = team => {
+    if (!S.partial || S.hideScore) return award(team, t.pts);
+    const l = []; for (let p = 5; p <= t.pts; p += 5) l.push([p + ' pts', 'b-ok', () => award(team, p)]);
+    if (t.pts % 5) l.push([t.pts + ' pts', 'b-ok', () => award(team, t.pts)]);
+    btns(l);
+  };
+  if (S.anyone && G.teams.length > 1) btns(G.teams.map((tm, i) => [tm.name, 'b-team', () => pickPoints(i)]));
+  else pickPoints(answering);
+}
+function wrong(t) {
+  SFX.bad();
+  const tm = G.teams[answering];
+  if (!S.hideScore) { if (S.resetWrong) tm.score = 0; else if (S.losePts) tm.score -= t.pts; }
+  finishTurnWithBump(S.resetWrong || S.losePts ? [answering] : []);
+}
+
+/* ---- power-up ---- */
+function openPU(t) {
+  SFX.pu(); showModal(true);
+  const p = PU[t.key], me = answering, teams = G.teams;
+  $('mhead').className = 'pu'; $('mpts').textContent = ''; setWho();
+  $('pubig').textContent = p.e; $('putitle').textContent = p.d; $('puresult').textContent = '';
+  $('mclose').onclick = () => finishTurn();
+  const others = teams.map((_, i) => i).filter(i => i !== me);
+  const run = (target, n) => {
+    const msg = applyPU(t.key, me, target, n);
+    $('puresult').textContent = msg.text;
+    $('mhead').className = (p.good ? 'pu' : 'bad');
+    btns([['✔ Okay', 'b-ok', () => finishTurnWithBump(msg.changed)]]);
+  };
+  // dice power-ups: choose the team (3+ teams), then roll; amount = face × 5 (5–30)
+  const roll = target => {
+    if (!DICE.has(t.key)) return run(target);
+    $('puresult').textContent = target != null && others.length > 1 ? `${teams[me].name} → ${teams[target].name}: roll the dice!` : 'Roll the dice!';
+    btns([['🎲 Roll', 'b-show', () => {
+      btns([]);
+      let k = 0, face = 1;
+      const spin = setInterval(() => {
+        face = 1 + Math.floor(Math.random() * 6);
+        $('pubig').textContent = DIE[face - 1]; SFX.tick();
+        if (++k >= 14) {
+          clearInterval(spin); SFX.pick();
+          $('putitle').textContent = `🎲 ${face} × 5 = ${face * 5} points!`;
+          setTimeout(() => run(target, face * 5), 700);
+        }
+      }, 90);
+    }]]);
+  };
+  if (p.tgt && others.length > 1) {
+    $('puresult').textContent = teams[me].name + ', choose a team:';
+    btns(others.map(i => [teams[i].name, 'b-team', () => roll(i)]));
+  } else roll(others[0]);
+}
+
+const DICE = new Set(['magnet', 'lifesaver', 'heart', 'shark']);
+const DIE = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+function applyPU(key, me, tg, n = 5) {
+  const T = G.teams, m = T[me], o = tg != null ? T[tg] : null;
+  const before = T.map(t => t.score);
+  let extra = '';
+  const othersMax = () => Math.max(...T.filter((_, i) => i !== me).map(t => t.score));
+  const othersMin = () => Math.min(...T.filter((_, i) => i !== me).map(t => t.score));
+  switch (key) {
+    case 'gold': m.score += 50; break;
+    case 'boom': m.score -= 50; break;
+    case 'star': m.score *= 2; break;
+    case 'eraser': m.score = 0; break;
+    case 'virus': T.forEach(t => t.score = 0); break;
+    case 'trap': extra = 'Nothing happens. Next team!'; break;
+    case 'rocket': if (m.score > othersMax()) extra = 'Already in first place!'; else m.score = othersMax() + 5; break;
+    case 'banana': if (m.score < othersMin()) extra = 'Already in last place!'; else m.score = othersMin() - 5; break;
+    case 'seesaw': [m.score, o.score] = [o.score, m.score]; break;
+    case 'magnet': { o.score -= n; m.score += n; extra = `Took ${n} from ${o.name}`; break; }
+    case 'lifesaver': { m.score -= n; o.score += n; extra = `Gave ${n} to ${o.name}`; break; }
+    case 'heart': { o.score += n; extra = `${o.name} wins ${n}`; break; }
+    case 'shark': { o.score -= n; extra = `${o.name} loses ${n}`; break; }
+  }
+  const changed = T.map((t, i) => i).filter(i => T[i].score !== before[i]);
+  const diffs = changed.map(i => `${T[i].name}: ${before[i]} → ${T[i].score}`).join(' · ');
+  return {text: [extra, diffs].filter(Boolean).join(' — ') || 'No change', changed};
+}
+
+/* ================= GAME OVER ================= */
+function gameOver() {
+  stopTimer(); $('modal').classList.add('hidden');
+  const ranked = G.teams.map((t, i) => ({...t, i})).sort((a, b) => b.score - a.score);
+  if (S.hideScore || G.teams.length === 1) $('winner').textContent = 'Well done!';
+  else if (ranked[0].score === ranked[1].score) $('winner').textContent = "It's a tie!";
+  else $('winner').textContent = ranked[0].name + ' wins!';
+  $('rank').innerHTML = S.hideScore ? '' : ranked.map((t, k) => `<div>${['🥇', '🥈', '🥉'][k] || (k + 1) + '.'} ${esc(t.name)} — <b>${t.score}</b></div>`).join('');
+  $('over').classList.remove('hidden'); SFX.win(); confetti();
+}
+
+function confetti() {
+  const c = $('confetti'), x = c.getContext('2d'); c.classList.remove('hidden');
+  c.width = innerWidth; c.height = innerHeight;
+  const cols = ['#ff6b6b', '#5aa6ff', '#25c26e', '#ec4899', '#fff', '#8b5cf6'];
+  const P = Array.from({length: 180}, () => ({x: Math.random() * c.width, y: -20 - Math.random() * c.height, v: 2 + Math.random() * 4, r: Math.random() * 6, s: 6 + Math.random() * 8, c: cols[Math.floor(Math.random() * cols.length)]}));
+  const t0 = Date.now();
+  (function f() {
+    x.clearRect(0, 0, c.width, c.height);
+    P.forEach(p => { p.y += p.v; p.x += Math.sin(p.y / 30); p.r += .1; x.save(); x.translate(p.x, p.y); x.rotate(p.r); x.fillStyle = p.c; x.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); x.restore(); });
+    if (Date.now() - t0 < 5000) requestAnimationFrame(f); else c.classList.add('hidden');
+  })();
+}
+
+/* ================= WIRING ================= */
+$('startBtn').onclick = newGame;
+$('tEnd').onclick = () => { if (G) gameOver(); };
+$('tEdit').onclick = () => $('game').classList.toggle('editing');
+$('tSound').onclick = () => { S.sound = !S.sound; $('tSound').textContent = S.sound ? '🔊' : '🔇'; };
+$('oBoard').onclick = () => { $('over').classList.add('hidden'); };
+$('oAgain').onclick = newGame;
+$('oSetup').onclick = () => { $('over').classList.add('hidden'); $('game').classList.add('hidden'); $('setup').classList.remove('hidden'); renderSetup(); };
+document.addEventListener('keydown', e => {
+  if ($('modal').classList.contains('hidden')) return;
+  if (e.key === 'Escape') { finishTurn(); return; }
+  const map = {c: 'b-check', o: 'b-ok', x: 'b-oops', p: 'b-pass', Enter: 'b-ok'};
+  const cls = map[e.key]; if (!cls) return;
+  const b = $('btns').querySelector('.' + cls); if (b) b.click();
+});
+$('tSound').textContent = S.sound ? '🔊' : '🔇';
+renderSetup();
+</script>
+</body>
+</html>

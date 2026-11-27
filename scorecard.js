@@ -17,7 +17,7 @@
     question.hidden=true;result.hidden=false;const data=model.analyse(answers),r=data.recommendation;
     document.querySelector('#result-score').textContent=`${data.answered} of 12 answered · your workflow, as described`;
     document.querySelector('#result-title').textContent=r.title;document.querySelector('#result-copy').textContent=r.cost;
-    document.querySelector('#result-action').textContent=r.action;const guide=document.querySelector('#result-guide');guide.href=r.guide;guide.textContent=r.label;document.querySelector('#result-offer').textContent=r.offer;
+    document.querySelector('#result-action').textContent=r.action;const guide=document.querySelector('#result-guide');guide.href=(window.SITE_ROOT||'')+r.guide;guide.textContent=r.label;document.querySelector('#result-offer').textContent=r.offer;
     const block=document.querySelector('#result-blocks');block.replaceChildren();data.blocks.forEach(item=>{const row=document.createElement('div'),label=document.createElement('span'),value=document.createElement('strong');label.textContent=item.name;value.textContent=item.score===null?`${item.answered}/4 answered`:`${item.score}/12`;row.append(label,value);block.append(row);});
     document.querySelector('#result-title').focus();
   }

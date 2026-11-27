@@ -34,7 +34,7 @@ nav .nav-cta:hover{background:var(--panel);color:var(--white)}.menu-toggle{displ
 .hero-grid{display:grid;grid-template-columns:1.15fr .9fr;gap:65px;align-items:center;padding-bottom:48px}
 .hero h1{font-size:clamp(2.25rem,3.6vw,3rem)}.hero h1 span{color:var(--yellow)}.audience-note{font-size:14px;line-height:1.5;color:var(--on-dark);margin-top:20px}
 .hero-lead{font:700 clamp(1.2rem,2vw,1.5rem)/1.4 var(--display);letter-spacing:-.02em;margin-top:23px}
-.hero-body{max-width:48ch;font-size:17px;color:var(--on-dark);margin-top:16px}
+.hero-body{font-size:17px;color:var(--on-dark);margin-top:16px}
 .hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px 24px;margin:27px 0 32px}
 .button{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:48px;border:0;border-radius:var(--radius);font-size:14px;font-weight:700;padding:14px 20px;line-height:1.4;transition:background .2s var(--ease),box-shadow .2s var(--ease)}
 .yellow{background:var(--yellow);color:var(--navy)}.yellow:hover{background:#ffe06b}.navy{background:var(--navy);color:var(--white)}.navy:hover{background:var(--panel)}
@@ -119,3 +119,58 @@ main>section:not(.hero){padding-block:var(--section-space)}.section-heading{disp
   #work .offer-card{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
   #work .offer-card .button{justify-self:start;margin-top:0}
 }
+
+/* 28 Nov 2026: fill the hero column, no ragged gaps */
+.hero h1{text-wrap:balance}
+.hero-lead{text-wrap:pretty}
+.hero-body,.audience-note{text-wrap:pretty}
+.hero .tags span{font-size:14px;font-weight:600;color:var(--white)}
+
+/* 28 Nov 2026: chooser page (/) — personal vs business */
+.gate-page main{min-height:calc(100vh - 160px);display:flex}
+.gate-page .hero.gate{flex:1;display:flex;align-items:center;padding-bottom:clamp(3rem,6vw,5rem)}
+.gate-page .hero.gate .wrap{width:100%}
+.gate h1{font-size:clamp(2.25rem,4.5vw,3.75rem)}
+.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:clamp(2rem,4vw,3rem)}
+.gate-card{display:flex;flex-direction:column;gap:12px;padding:clamp(28px,4vw,44px);border-radius:var(--radius);background:var(--white);color:var(--ink);text-decoration:none;border:2px solid transparent;transition:transform .15s,border-color .15s}
+.gate-card:hover,.gate-card:focus-visible{transform:translateY(-3px);border-color:var(--yellow)}
+.gate-card .offer-audience{font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gate-card h2{font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.2}
+.gate-card p{font-size:17px;line-height:1.6}
+.gate-go{margin-top:auto;padding-top:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px}
+.gate-featured{background:var(--yellow);color:var(--navy)}
+.gate-featured .offer-audience{color:var(--navy)}
+.gate-featured:hover,.gate-featured:focus-visible{border-color:var(--white)}
+@media(max-width:700px){.gate-grid{grid-template-columns:1fr}}
+.hero .tags{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+@media(max-width:700px){.hero .tags{grid-template-columns:1fr}}
+#work .offer-grid{align-items:start}
+/* 28 Nov: align prices across the two offer cards */
+#work .offer-grid>.offer-card{display:grid;grid-template-rows:subgrid;grid-row:span 4;row-gap:0}
+#work .offer-head{margin-bottom:0}
+#work .offer-card .button{margin-top:20px}
+@media(max-width:850px){#work .offer-grid>.offer-card{display:flex;flex-direction:column;grid-row:auto}}
+.mini-label{font:800 13px/1.4 var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:0 0 14px}
+.recognition-label{margin-top:35px;padding-top:28px;border-top:1px solid var(--line)}
+.recognition-label+.recognition-strip{border-top:0;margin-top:0;padding-top:0}
+
+/* 28 Nov: pain -> why -> new way, before the offers */
+.why-section{padding-bottom:0}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.why-grid article{padding:30px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);display:flex;flex-direction:column;gap:12px}
+.why-grid h3{font-size:22px;line-height:1.3}
+.why-grid p:not(.mini-label){font-size:16px;color:var(--muted)}
+.why-grid .mini-label{margin:0}
+.why-quotes{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.why-quotes li{font:600 17px/1.5 var(--display);letter-spacing:-.02em}
+.why-grid .why-new{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.why-grid .why-new h3{color:var(--yellow)}
+.why-grid .why-new p:not(.mini-label){color:var(--on-dark)}
+.why-grid .why-new .mini-label{color:var(--on-dark)}
+.why-bridge{margin-top:28px;font:700 clamp(1.1rem,1.8vw,1.35rem)/1.4 var(--display);display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}
+.why-bridge .text-link{font:600 16px/1.5 var(--body,inherit)}
+@media(max-width:950px){.why-grid{grid-template-columns:1fr}}
+#why .section-heading{grid-template-columns:1fr}
+#why h2{max-width:none}
+.setup-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:8px}
+#own-setup .setup-card p,#own-setup .section-heading>p{max-width:none}
