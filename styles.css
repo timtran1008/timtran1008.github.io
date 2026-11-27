@@ -174,3 +174,6 @@ main>section:not(.hero){padding-block:var(--section-space)}.section-heading{disp
 #why h2{max-width:none}
 .setup-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:8px}
 #own-setup .setup-card p,#own-setup .section-heading>p{max-width:none}
+.gate-card{justify-content:center;min-height:180px}
+.gate-card .gate-go{margin:0;padding:0;font:800 clamp(1.5rem,2.6vw,2.2rem)/1.2 var(--display);letter-spacing:-.02em}
+.gate-card .gate-go .icon{width:1em;height:1em}
